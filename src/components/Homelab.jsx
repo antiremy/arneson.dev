@@ -8,11 +8,11 @@ export default function Homelab() {
       </Helmet>
       <div className="lg:w-1/2 max-w-xl">
         <div className="text-2xl font-bold font-white">My homelab</div>
-        <div className="text-base mt-4 mb-8">
+        <div className="text-base mt-4 mb-6">
           I have a "small" 22U server rack in my closet that I use to host
           services (including this website!) and learn new technologies.
         </div>
-        <hr className="h-[1px] bg-white opacity-10 mb-8" />
+        <hr className="h-[1px] bg-white opacity-10 mb-6" />
         <div className="font-semibold pb-2 text-lg flex flex-row items-center justify-start w-full">
           Unraid Server
         </div>

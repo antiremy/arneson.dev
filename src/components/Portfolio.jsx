@@ -58,21 +58,29 @@ export default function Portfolio() {
             stream of product data.
           </div>
 
-          <div className="pt-2 mb-4">
-            <img src={Images.PingsTable} alt="Monitr Pings"/>
+          <div className="pt-2 mb-4 pb-[62.5%] w-full h-0">
+            <img
+              src={Images.PingsTable}
+              alt="Monitr Pings"
+              className="w-full rounded-md"
+            />
           </div>
 
-          <div className="flex flex-row justify-center rounded-sm">
-            <img
-              src={Images.SearchMobile}
-              className="w-6/12 rounded-sm"
-              alt="Monitr Search"
-            />
-            <img
-              src={Images.NotificationsMobile}
-              className="w-6/12 ml-4 rounded-sm"
-              alt="Monitr Notifications"
-            />
+          <div className="flex flex-row justify-center rounded-sm h-0 pb-[105%]">
+            <div className="w-6/12 h-0 pb-[105%]">
+              <img
+                src={Images.SearchMobile}
+                alt="Monitr Search"
+                className="rounded-md"
+              />
+            </div>
+            <div className="w-6/12 ml-4 h-0 pb-[105%]">
+              <img
+                src={Images.NotificationsMobile}
+                className="rounded-md"
+                alt="Monitr Notifications"
+              />
+            </div>
           </div>
           <div className="pt-2">
             Monitr's users were notified of restocks and new products across
@@ -100,11 +108,11 @@ export default function Portfolio() {
             just supporting Shopify-managed storefronts, grew to encompass any
             major website doing similar high-demand drops.
           </div>
-          <div className="pt-2 pb-4">
-            <img src={Images.WrathDashboard} alt="Wrath Dashboard"/>
+          <div className="pt-2 pb-[61.79%] w-full h-0 mb-4">
+            <img src={Images.WrathDashboard} alt="Wrath Dashboard" className="rounded-md"/>
           </div>
-          <div className="pt-2 pb-2">
-            <img src={Images.WrathTasks} alt="Wrath Tasks"/>
+          <div className="pt-2 mb-2 pb-[61.79%] w-full h-0">
+            <img src={Images.WrathTasks} alt="Wrath Tasks" className="rounded-md" />
           </div>
           <div className="pt-2">
             Wrath has left an incredible mark on the e-commerce world with
