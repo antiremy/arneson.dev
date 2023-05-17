@@ -1,14 +1,18 @@
 import "./App.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 
 import Home from "./components/Home";
 import Portfolio from "./components/Portfolio";
 import Root from "./components/Root";
+import Error from "./components/Error"
+import FourOhFour from "./components/FourOhFour";
+import Homelab from "./components/Homelab";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    errorElement: <Error />,
     children: [
       {
         path: "/",
@@ -18,6 +22,18 @@ const router = createBrowserRouter([
         path: "/portfolio",
         element: <Portfolio />,
       },
+      {
+        path: "/homelab",
+        element: <Homelab />
+      },
+      {
+        path: "/404",
+        element: <FourOhFour />
+      },
+      {
+        path: "/*",
+        element: <Navigate to="/404" replace />
+      }
     ],
   },
 ]);

@@ -37,3 +37,47 @@
   }
 }
 
+.clock {
+  position: relative;
+  background-color: white;
+  border-radius: 100px;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+}
+
+.hour,
+.minute,
+.second {
+    position: absolute;
+    background: black;
+    border-radius: 10px;
+    transform-origin: bottom;
+    /* transition: transform 1s; */
+}
+  
+.hour {
+    width: 5%;
+    height: 25%;
+    top: 25%;
+    left: 45%;
+    opacity: 0.8; 
+}
+  
+.minute {
+    width: 3.8%;
+    height: 30%;
+    top: 20%;
+    left: 46.2%;
+    opacity: 0.8;
+}
+  
+.second {
+    width: 3%;
+    height: 40%;
+    top: 9%;
+    left: 47%;
+    opacity: 0.8;
+    background-color: red;
+}

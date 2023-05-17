@@ -29,14 +29,17 @@ export default function Nav() {
           <img
             src={PersonalLogo}
             id="logo"
+            alt="Remington Arneson logo"
           />
       </NavLink>
 
       <Link label="Home" href="/" />
       <Link label="Portfolio" href="/portfolio" />
+      <Link label="Homelab" href="/homelab" />
       {/* <Link label="Blog" href="/blog" />
       <Link label="About" href="/about" /> */}
 
+      <div className="max-lg:w-full"/>
       <span className="pt-6 max-lg:hidden font-extrabold text-xs">OFFSITE</span>
       <Link
         href="https://twitter.com/RemingtonArn"

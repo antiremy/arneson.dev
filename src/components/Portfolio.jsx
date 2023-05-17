@@ -1,20 +1,50 @@
+import { useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
+import { Helmet } from "react-helmet";
+
 import Images from "../PortfolioImages/Images.jsx";
+import { ReactComponent as HyperlinkIcon } from "../hyperlink-icon.svg";
 
 export default function Portfolio() {
+  const { hash } = useLocation();
+
+  const MonitrRef = useRef();
+  const WrathRef = useRef();
+
+  useEffect(() => {
+    if (hash === "#monitr") {
+      MonitrRef.current.scrollIntoView();
+    } else if (hash === "#wrath") {
+      WrathRef.current.scrollIntoView();
+    }
+  }, [hash]);
+
   return (
     <div className="w-full justify-center flex mt-20 pb-8">
+      <Helmet>
+        <title>Portfolio | Remington</title>
+      </Helmet>
       <div className="lg:w-1/2 max-w-xl flex flex-col justify-top">
-        <div className="text-3xl font-bold font-white">My work</div>
-        <span className="text-md pt-4 pb-8">
+        <div className="text-2xl font-bold font-white">My work</div>
+        <span className="text-base pt-4 pb-8">
           Many of my personal projects come from combining my love of technology
           with other hobbies. I've always been driven to discover how software
           and technology can solve problems, not only for myself, but for
           everyone, in intuitive and untraditional ways.
         </span>
-        <hr className="h-[1px] bg-white opacity-10" />
-        <div className="pt-8 pb-10 font-semibold">Key work</div>
-        <div className="text-sm pb-10" id="monitr">
-          <div className="font-semibold pb-2">Monitr (2021-Present)</div>
+        <hr className="h-[1px] bg-white opacity-10 mb-8" />
+        {/* <div className="pt-8 pb-10 text-lg font-semibold">Key work</div> */}
+        <div
+          className="text-sm pb-10 flex flex-col items-center"
+          id="monitr"
+          ref={MonitrRef}
+        >
+          <div className="font-semibold pb-2 text-lg flex flex-row items-center justify-start w-full">
+            <a href="#monitr">
+              <HyperlinkIcon className="w-3 mr-1" fill="#226f54" />
+            </a>
+            Monitr (2021-Present)
+          </div>
           <div className="pb-2">
             I founded Monitr (formerly Monitr.gg) in 2021 to give access to
             high-quality e-commerce monitoring tools to anyone.
@@ -27,14 +57,21 @@ export default function Portfolio() {
             extensible; setting up to allow new use-cases for this constant
             stream of product data.
           </div>
-          <div className="pt-2 pb-4">
-            <img src={Images.PingsTable} />
+
+          <div className="pt-2 mb-4">
+            <img src={Images.PingsTable} alt="Monitr Pings"/>
           </div>
+
           <div className="flex flex-row justify-center rounded-sm">
-            <img src={Images.SearchMobile} className="w-6/12 rounded-sm" />
+            <img
+              src={Images.SearchMobile}
+              className="w-6/12 rounded-sm"
+              alt="Monitr Search"
+            />
             <img
               src={Images.NotificationsMobile}
               className="w-6/12 ml-4 rounded-sm"
+              alt="Monitr Notifications"
             />
           </div>
           <div className="pt-2">
@@ -45,10 +82,15 @@ export default function Portfolio() {
             graphics cards.
           </div>
         </div>
-        <div className="text-sm" id="wrath">
-          <div className="font-semibold pb-2">Wrath (2018-2021)</div>
+        <div className="text-sm" id="wrath" ref={WrathRef}>
+          <div className="font-semibold pb-2 text-lg flex flex-row items-center">
+            <a href="#wrath">
+              <HyperlinkIcon className="w-3 mr-1" fill="#226f54" />
+            </a>
+            Wrath (2018-2021)
+          </div>
           <div className="pb-2">
-            I partnered with another developer in 2018 to create Wrath, an
+            I partnered with another developer in 2018 to work on Wrath, an
             invite-only checkout automation software. I was bought out of Wrath
             in 2021.
           </div>
@@ -59,10 +101,10 @@ export default function Portfolio() {
             major website doing similar high-demand drops.
           </div>
           <div className="pt-2 pb-4">
-            <img src={Images.WrathDashboard} />
+            <img src={Images.WrathDashboard} alt="Wrath Dashboard"/>
           </div>
           <div className="pt-2 pb-2">
-            <img src={Images.WrathTasks} />
+            <img src={Images.WrathTasks} alt="Wrath Tasks"/>
           </div>
           <div className="pt-2">
             Wrath has left an incredible mark on the e-commerce world with
