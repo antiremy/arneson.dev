@@ -1,0 +1,41 @@
+.clock {
+    position: relative;
+    background-color: white;
+    border-radius: 100px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.hour,
+.minute,
+.second {
+    position: absolute;
+    background: black;
+    border-radius: 10px;
+    transform-origin: bottom;
+}
+  
+.hour {
+    width: 6%;
+    height: 25%;
+    top: 25%;
+    left: 45%;
+    opacity: 0.8; 
+}
+  
+.minute {
+    width: 5%;
+    height: 35%;
+    top: 16%;
+    left: 44.2%;
+    opacity: 0.8;
+}
+
+.second {
+    width: 3.5%;
+    height: 40%;
+    top: 10%;
+    left: 47%;
+    opacity: 0.8;
+    background-color: red;
+}
