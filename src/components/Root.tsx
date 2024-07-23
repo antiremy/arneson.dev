@@ -13,7 +13,6 @@ export default function Root() {
   const [isScroll, setIsScroll] = useState(false);
 
   function updateState() {
-    console.log("updating", ref.current?.scrollHeight,  window.innerHeight, isScroll);
     if (ref.current && ref.current?.scrollHeight - 1 > window.innerHeight) {
       setIsScroll(true);
     } else {

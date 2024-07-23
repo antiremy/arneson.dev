@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import Loading from "./Loading";
 import Script from "next/script";
@@ -7,10 +7,6 @@ export const metadata: Metadata = {
   title: "Remington Arneson",
   description: "Personal website",
 };
-
-export const viewport: Viewport = {
-  colorScheme: 'dark light',
-}
 
 export default function RootLayout({
   children,
