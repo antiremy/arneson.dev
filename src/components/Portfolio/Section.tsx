@@ -98,7 +98,7 @@ export default function Section(props: SectionProps) {
             }
           }}
         >
-          <div className="flex-start fixed left-0 top-0 z-50 flex h-12 w-full bg-white pb-2 pl-4 pt-2 text-4xl dark:bg-gray-800 md:bg-transparent md:pt-4 md:dark:bg-transparent">
+          <div className="flex-start fixed left-0 top-0 z-50 flex h-12 w-full bg-white pb-2 pl-4 pt-2 text-4xl dark:bg-gray-800 lg:pt-4 lg:dark:bg-transparent">
             <div
               onClick={() => {
                 history.pushState({ page: "home" }, "", "/");

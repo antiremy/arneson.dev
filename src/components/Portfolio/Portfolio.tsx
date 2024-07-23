@@ -17,7 +17,7 @@ const sections = [
     internalLink: "monitr",
     data: (
       <div
-        className="text-md md:text-sm pb-8 flex flex-col items-center px-4 space-y-4"
+        className="text-md lg:text-sm pb-8 flex flex-col items-center px-4 space-y-4"
         id="monitr"
       >
           <div className="font-semibold pb-2 text-lg flex flex-row items-center justify-start w-full">
@@ -102,7 +102,7 @@ const sections = [
 
 export default function Portfolio() {
   return (
-    <div className="grid grid-flow-row md:grid-cols-2 gap-6 mt-6 mx-auto z-30">
+    <div className="grid grid-flow-row lg:grid-cols-2 gap-6 mt-6 mx-auto z-30">
       {sections.map((section, i) => (
         <Section
           title={section.title}

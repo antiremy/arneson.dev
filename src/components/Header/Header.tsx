@@ -42,14 +42,14 @@ export default function Header() {
 
   return (
     <header className="justify-center items-center">
-      <h1 className="text-4xl font-bold md:text-6xl text-center">
+      <div className="text-4xl font-bold lg:text-6xl text-center">
         Remington Arneson
-      </h1>
+      </div>
       <div
         onMouseOver={() => setMouseOver(true)}
         onMouseOut={() => setMouseOver(false)}
       >
-        <div className="flex justify-center items-center space-x-3 pt-4 text-md md:text-lg">
+        <div className="flex justify-center items-center space-x-3 pt-4 text-md lg:text-lg">
           <div>
             <FontAwesomeIcon icon={faLocationDot} />
             &nbsp;{current?.location}
@@ -69,7 +69,7 @@ export default function Header() {
       <div className="text-2xl flex justify-center mt-4 text-emerald-600">
         <a href="mailto:remy@arneson.dev">remy@arneson.dev</a>
       </div>
-      <div className="mt-4 block md:hidden md:mt-0">
+      <div className="mt-4 block lg:hidden lg:mt-0">
         <ExternalLinks />
       </div>
     </header>
