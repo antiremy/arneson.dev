@@ -67,7 +67,7 @@ export default function Header() {
       </div>
 
       <div className="text-2xl flex justify-center mt-4 text-emerald-600">
-        <a href="mailto:remy@arneson.dev">remy@arneson.dev</a>
+        <a href="mailto:remy@arneson.dev" data-umami-event="Email link">remy@arneson.dev</a>
       </div>
       <div className="mt-4 block lg:hidden lg:mt-0">
         <ExternalLinks />

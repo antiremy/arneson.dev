@@ -71,6 +71,7 @@ export default function Section(props: SectionProps) {
             setShowModal(true);
           }
         }}
+        data-umami-event={`${props.title} card`}
       >
         <div className="text-xl font-semibold">{props.title} </div>
         <div className="pt-0.5 text-2xl font-bold">

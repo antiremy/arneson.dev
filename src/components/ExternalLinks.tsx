@@ -13,16 +13,19 @@ export default function ExternalLinks() {
         icon={faLinkedinIn}
         href="https://www.linkedin.com/in/remington-arneson"
         title="Go to LinkedIn"
+        event="LinkedIn button"
       />
       <IconLink
         icon={faGithub}
         href="https://github.com/antiremy"
         title="Go to GitHub"
+        event="GitHub button"
       />
       <IconLink
         icon={faXTwitter}
         href="https://twitter.com/RemingtonArn"
         title="Go to Twitter"
+        event="Twitter button"
       />
     </div>
   );
