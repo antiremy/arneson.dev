@@ -1,13 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 
-import Root from './components/Root.tsx';
+import Root from "./components/Root.tsx";
 
-import './App.css'
+import "./App.css";
 
 function App() {
-  return (
-    <Root/>
-  )
+  return <Root />;
 }
 
-export default App
+export default App;

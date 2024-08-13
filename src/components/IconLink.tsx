@@ -10,9 +10,14 @@ interface IconLinkProps {
 
 export default function IconLink(props: IconLinkProps) {
   return (
-    <a href={props.href} target="_blank" title={props.title} data-umami-event={props.event}>
-      <div className="size-12 text-3xl border-2 flex justify-center items-center border-black dark:border-white rounded-md">
-        <FontAwesomeIcon icon={props.icon} className="p-1"/>
+    <a
+      href={props.href}
+      target="_blank"
+      title={props.title}
+      data-umami-event={props.event}
+    >
+      <div className="flex size-12 items-center justify-center rounded-md border-2 border-black text-3xl dark:border-white">
+        <FontAwesomeIcon icon={props.icon} className="p-1" />
       </div>
     </a>
   );

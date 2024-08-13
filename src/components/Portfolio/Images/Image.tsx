@@ -8,7 +8,7 @@ export default function ClickableImage(props: {
   const [showOriginal, setShowOriginal] = useState(false);
   return (
     <>
-      <div onClick={() => setShowOriginal(true)} className="z-0 relative">
+      <div onClick={() => setShowOriginal(true)} className="relative z-0">
         <Image
           src={props.src}
           className="h-auto max-h-96 w-auto max-w-96 rounded-md drop-shadow-none transition hover:cursor-pointer hover:drop-shadow-glow"

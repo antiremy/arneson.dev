@@ -23,9 +23,9 @@ export default function Root() {
   useEffect(() => {
     if (ref.current) {
       updateState();
-  
+
       window.addEventListener("resize", updateState);
-  
+
       return () => window.removeEventListener("resize", updateState);
     }
   }, [ref.current]);

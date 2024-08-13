@@ -17,9 +17,9 @@ const months = [
   "December",
 ];
 
-export default function Clock(props: {mouseOver: boolean}) {
+export default function Clock(props: { mouseOver: boolean }) {
   const [now, setNow] = useState(
-    new Date(new Date().toLocaleString("en", { timeZone: "America/New_York" }))
+    new Date(new Date().toLocaleString("en", { timeZone: "America/New_York" })),
   );
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function Clock(props: {mouseOver: boolean}) {
         d = new Date();
       } else {
         d = new Date(
-          new Date().toLocaleString("en", { timeZone: "America/New_York" })
+          new Date().toLocaleString("en", { timeZone: "America/New_York" }),
         );
       }
 
@@ -61,27 +61,28 @@ export default function Clock(props: {mouseOver: boolean}) {
 
   function getDate() {
     return `${months[now.getMonth()]} ${now.getDate()}${nth(
-      now.getDate()
+      now.getDate(),
     )}, ${now.getFullYear()}`;
   }
 
   function getTimeString() {
     return (
       <>
-        <span className="min-w-[56px] max-w-[56px] inline-block">
+        <span className="inline-block min-w-[56px] max-w-[56px]">
           {`${(now.getHours() > 12 ? now.getHours() % 12 : now.getHours())
             .toString()
             .padStart(2, "0")}:${now
             .getMinutes()
             .toString()
             .padStart(2, "0")}:${now.getSeconds().toString().padStart(2, "0")}`}
-        </span>&nbsp;
+        </span>
+        &nbsp;
         {now.getHours() >= 12 ? "PM " : "AM "}
         {props.mouseOver
           ? now.toLocaleString("en", { timeZoneName: "short" }).split(" ").pop()
           : isDST(now)
-          ? "EDT"
-          : "EST"}
+            ? "EDT"
+            : "EST"}
       </>
     );
   }
@@ -99,10 +100,8 @@ export default function Clock(props: {mouseOver: boolean}) {
   }
 
   return (
-    <div
-      className="flex flex-row items-center mt-1"
-    >
-      <div className="relative bg-white rounded-[100px] size-5 animate mr-1 border dark:border-0 border-black">
+    <div className="mt-1 flex flex-row items-center">
+      <div className="animate relative mr-1 size-5 rounded-[100px] border border-black bg-white dark:border-0">
         <div
           className="hour"
           style={{

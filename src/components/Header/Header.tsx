@@ -31,7 +31,9 @@ export default function Header() {
             setWeather(data);
           }
         })
-        .catch((error) => {});
+        .catch((error) => {
+          console.error("Error fetching weather:", error);
+        });
   }, []);
 
   useEffect(() => {
@@ -41,15 +43,15 @@ export default function Header() {
   }, [weather, mouseOver]);
 
   return (
-    <header className="justify-center items-center">
-      <div className="text-4xl font-bold lg:text-6xl text-center">
+    <header className="items-center justify-center">
+      <div className="text-center text-4xl font-bold lg:text-6xl">
         Remington Arneson
       </div>
       <div
         onMouseOver={() => setMouseOver(true)}
         onMouseOut={() => setMouseOver(false)}
       >
-        <div className="flex justify-center items-center space-x-3 pt-4 text-md lg:text-lg">
+        <div className="text-md flex justify-center space-x-3 pt-4 lg:text-lg w-full">
           <div>
             <FontAwesomeIcon icon={faLocationDot} />
             &nbsp;{current?.location}
@@ -61,15 +63,17 @@ export default function Header() {
             condition_id={current?.condition_id}
           />
         </div>
-        <div className="flex justify-center items-center flex-col text-sm">
+        <div className="flex flex-col items-center justify-center text-sm">
           <Clock mouseOver={mouseOver} />
         </div>
       </div>
 
-      <div className="text-2xl flex justify-center mt-4 text-emerald-600">
-        <a href="mailto:remy@arneson.dev" data-umami-event="Email link">remy@arneson.dev</a>
+      <div className="mt-4 flex justify-center text-2xl text-emerald-600">
+        <a href="mailto:remy@arneson.dev" data-umami-event="Email link">
+          remy@arneson.dev
+        </a>
       </div>
-      <div className="mt-4 block lg:hidden lg:mt-0">
+      <div className="mt-4 block lg:mt-0 lg:hidden">
         <ExternalLinks />
       </div>
     </header>

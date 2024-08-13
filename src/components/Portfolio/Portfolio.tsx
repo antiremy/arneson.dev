@@ -17,40 +17,39 @@ const sections = [
     internalLink: "monitr",
     data: (
       <div
-        className="text-md lg:text-sm pb-8 flex flex-col items-center px-4 space-y-4"
+        className="text-md flex flex-col items-center space-y-4 px-4 pb-8 lg:text-sm"
         id="monitr"
       >
-          <div className="font-semibold pb-2 text-lg flex flex-row items-center justify-start w-full">
-            Monitr (2021-2023)
-          </div>
-          <div>
-            After noticing how none of my friends knew when console restocks
-            happened, I founded Monitr (formerly Monitr.gg) in 2021 to give
-            access to high-quality e-commerce monitoring tools to anyone.
-          </div>
-          <div>
-            Monitr was a platform that kept track of thousands of products
-            across 200+ websites. Monitr's goal was to help any user get any
-            item they want, being developed during a time where PlayStation 5s
-            were never in stock for more than a few seconds. This platform was
-            extensible; setting up to allow new use-cases for this constant
-            stream of product data.
-          </div>
+        <div className="flex w-full flex-row items-center justify-start pb-2 text-lg font-semibold">
+          Monitr (2021-2023)
+        </div>
+        <div>
+          After noticing how none of my friends knew when console restocks
+          happened, I founded Monitr (formerly Monitr.gg) in 2021 to give access
+          to high-quality e-commerce monitoring tools to anyone.
+        </div>
+        <div>
+          Monitr was a platform that kept track of thousands of products across
+          200+ websites. Monitr's goal was to help any user get any item they
+          want, being developed during a time where PlayStation 5s were never in
+          stock for more than a few seconds. This platform was extensible;
+          setting up to allow new use-cases for this constant stream of product
+          data.
+        </div>
 
-          <div className="grid grid-cols-2 gap-2 place-items-center px-0">
-            <div className="col-span-2">{Images.MonitrPingsTable}</div>
-            <div className="">{Images.MonitrSearchMobile}</div>
-            <div>{Images.MonitrNotificationsMobile}</div>
-          </div>
+        <div className="grid grid-cols-2 place-items-center gap-2 px-0">
+          <div className="col-span-2">{Images.MonitrPingsTable}</div>
+          <div className="">{Images.MonitrSearchMobile}</div>
+          <div>{Images.MonitrNotificationsMobile}</div>
+        </div>
 
-          <div>
-            Monitr's users were notified of restocks and new products across
-            push notifications (Android, iOS, browser), webhooks (Discord), and
-            websockets within a second of it being detected. This resulted in
-            successful checkouts for coveted shoes, gaming consoles, and
-            graphics cards.
-          </div>
-
+        <div>
+          Monitr's users were notified of restocks and new products across push
+          notifications (Android, iOS, browser), webhooks (Discord), and
+          websockets within a second of it being detected. This resulted in
+          successful checkouts for coveted shoes, gaming consoles, and graphics
+          cards.
+        </div>
       </div>
     ),
   },
@@ -62,8 +61,8 @@ const sections = [
     internalLink: "wrath",
     data: (
       <>
-        <div className="text-sm px-4" id="wrath">
-          <div className="font-semibold pb-2 text-lg flex flex-row items-center">
+        <div className="px-4 text-sm" id="wrath">
+          <div className="flex flex-row items-center pb-2 text-lg font-semibold">
             Wrath (2018-2021)
           </div>
           <div className="pb-2">
@@ -77,7 +76,7 @@ const sections = [
             just supporting Shopify-managed storefronts, grew to encompass any
             major website doing similar high-demand drops.
           </div>
-          <div className="grid grid-cols-1 gap-2 py-2 place-items-center">
+          <div className="grid grid-cols-1 place-items-center gap-2 py-2">
             {Images.WrathDashboard}
             {Images.WrathTasks}
           </div>
@@ -94,7 +93,8 @@ const sections = [
   {
     title: "Capital One",
     position: "Software Engineer",
-    subtitle: "\"What's in your wallet?\" - America's 4th Largest Credit Card Issuer",
+    subtitle:
+      "\"What's in your wallet?\" - America's 4th Largest Credit Card Issuer",
     dates: "Aug 2018 - Nov 2020",
     externalLink: "https://www.capitalone.com/",
   },
@@ -102,7 +102,7 @@ const sections = [
 
 export default function Portfolio() {
   return (
-    <div className="grid grid-flow-row lg:grid-cols-2 gap-6 mt-6 mx-auto z-30">
+    <div className="z-30 mx-auto mt-6 grid grid-flow-row gap-6 lg:grid-cols-2">
       {sections.map((section, i) => (
         <Section
           title={section.title}
