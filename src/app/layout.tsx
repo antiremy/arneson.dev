@@ -14,9 +14,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="overflow-x-hidden">
-        <div id="root">
+    <html lang="en" className="bg-white dark:bg-gray-800">
+      <body className="overflow-x-hidden bg-white dark:bg-gray-800">
+        <div id="root" className="bg-white dark:bg-gray-800">
           <Suspense fallback={<Loading />}>{children}</Suspense>
           <Script src="https://analytics.remy.lol/script.js" data-website-id="371ca0ca-bed0-4b09-a25d-f14cbaed47c5"/>
         </div>
