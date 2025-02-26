@@ -1,5 +1,7 @@
+import { faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useRef, useState } from "react";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Footer from "./Footer.tsx";
 import Header from "./Header/Header.tsx";
 import Portfolio from "./Portfolio/Portfolio.tsx";
@@ -9,9 +11,9 @@ export default function Root() {
     window.matchMedia &&
       window.matchMedia("(prefers-color-scheme: dark)").matches,
   );
-  const [seeMore, setSeeMore] = useState(false)
+  const [seeMore, setSeeMore] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  
+
   return (
     <div
       ref={ref}
@@ -22,8 +24,20 @@ export default function Root() {
       <div className="mt-6 lg:mt-auto">
         <Header />
       </div>
-      <div className="z-30 max-w-4xl">
-        <Portfolio seeMore={seeMore} setSeeMore={setSeeMore}/>
+      <div className="z-30 max-h-full max-w-4xl lg:overflow-y-scroll">
+        <Portfolio seeMore={seeMore} setSeeMore={setSeeMore} />
+      </div>
+      <div className="w-full pt-2 text-center">
+        <a
+          className="invisible w-full text-center lg:visible lg:mb-6"
+          onClick={() => setSeeMore(!seeMore)}
+        >
+          <FontAwesomeIcon
+            className="text-l"
+            icon={seeMore ? faArrowUp : faArrowDown}
+          />
+          {seeMore ? " See Less" : " See More"}
+        </a>
       </div>
       <div className="mt-auto">
         <Footer />

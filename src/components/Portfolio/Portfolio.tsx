@@ -1,6 +1,3 @@
-import { faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Images from "./Images/Images.tsx";
 import Section from "./Section.tsx";
 import { useState } from "react";
@@ -128,15 +125,14 @@ interface PortfolioArgs {
 }
 
 export default function Portfolio(opts: PortfolioArgs) {
-  const {seeMore, setSeeMore} = opts
+  const {seeMore} = opts
 
   return (
-    <>
       <div
-        className={`lg:duration-500 z-30 mx-auto mt-6 grid grid-flow-row gap-6 lg:grid-cols-2 lg:transition-[max-height] ${seeMore ? "lg:max-h-[56rem]" : "lg:max-h-[28rem] overflow-hidden"}`}
+        className={`lg:duration-500 z-30 mx-auto mt-6 grid grid-flow-row gap-6 lg:grid-cols-2 lg:transition-[max-height] ${seeMore ? "lg:max-h-[56rem] overflow-y-scroll" : "lg:max-h-[28rem] overflow-hidden"}`}
       >
         {sections.map((section, i) => (
-          <div key={i} className={`lg:transition-[max-height] lg:transition-[opacity] lg:duration-300 ${i < 4 || seeMore ? "lg:opacity-100" : "lg:opacity-0"}`}>
+          <div key={i} className={`lg:transition-[opacity] lg:duration-300 ${i < 4 || seeMore ? "lg:opacity-100" : "lg:opacity-0"}`}>
             <Section
               title={section.title}
               subtitle={section.subtitle}
@@ -150,18 +146,5 @@ export default function Portfolio(opts: PortfolioArgs) {
           </div>
         ))}
       </div>
-      <div className="w-full text-center pt-2">
-        <a
-          className="invisible w-full text-center lg:visible lg:mb-6"
-          onClick={() => setSeeMore(!seeMore)}
-        >
-          <FontAwesomeIcon
-            className="text-l"
-            icon={seeMore ? faArrowUp : faArrowDown}
-          />
-          {seeMore ? " See Less" : " See More"}
-        </a>
-      </div>
-    </>
   );
 }
