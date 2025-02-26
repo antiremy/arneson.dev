@@ -1,18 +1,35 @@
+import { faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Images from "./Images/Images.tsx";
 import Section from "./Section.tsx";
+import { useState } from "react";
 
 const sections = [
   {
+    title: "Rocket Mortgage",
+    position: "Software Engineer II",
+    subtitle: (
+      <div className="text-xl">
+        "Help everyone home" - America's Largest Online Mortgage Lender
+      </div>
+    ),
+    dates: "Oct 2024 - Present",
+    externalLink: "https://www.rocketmortgage.com/",
+  },
+  {
     title: "Ultimate Kronos Group",
     position: "Senior Software Engineer",
-    subtitle: "HR and workforce management solutions",
-    dates: "Jun 2023 - Present",
+    subtitle: (
+      <div className="text-xl">HR and workforce management solutions</div>
+    ),
+    dates: "Jun 2023 - Sep 2024",
     externalLink: "https://www.ukg.com/",
   },
   {
     title: "Monitr",
     position: "Founder & CEO",
-    subtitle: "E-commerce monitoring for everyone",
+    subtitle: <div className="text-xl">E-commerce monitoring for everyone</div>,
     dates: "Oct 2021 - Jun 2023",
     internalLink: "monitr",
     data: (
@@ -56,7 +73,9 @@ const sections = [
   {
     title: "Wrath",
     position: "CTO & Developer",
-    subtitle: "Private checkout automation software",
+    subtitle: (
+      <div className="text-xl">Private checkout automation software</div>
+    ),
     dates: "Feb 2018 - Jul 2021",
     internalLink: "wrath",
     data: (
@@ -93,28 +112,56 @@ const sections = [
   {
     title: "Capital One",
     position: "Software Engineer",
-    subtitle:
-      "\"What's in your wallet?\" - America's 4th Largest Credit Card Issuer",
+    subtitle: (
+      <div className="text-xl">
+        "What's in your wallet?" - America's 4th Largest Credit Card Issuer
+      </div>
+    ),
     dates: "Aug 2018 - Nov 2020",
     externalLink: "https://www.capitalone.com/",
   },
 ];
 
-export default function Portfolio() {
+interface PortfolioArgs {
+  seeMore: boolean;
+  setSeeMore: Function;
+}
+
+export default function Portfolio(opts: PortfolioArgs) {
+  const {seeMore, setSeeMore} = opts
+
   return (
-    <div className="z-30 mx-auto mt-6 grid grid-flow-row gap-6 lg:grid-cols-2">
-      {sections.map((section, i) => (
-        <Section
-          title={section.title}
-          subtitle={section.subtitle}
-          position={section.position}
-          data={section.data}
-          dates={section.dates}
-          externalLink={section.externalLink}
-          internalLink={section.internalLink}
-          key={i}
-        />
-      ))}
-    </div>
+    <>
+      <div
+        className={`lg:duration-500 z-30 mx-auto mt-6 grid grid-flow-row gap-6 lg:grid-cols-2 lg:transition-[max-height] ${seeMore ? "lg:max-h-[56rem]" : "lg:max-h-[28rem] overflow-hidden"}`}
+      >
+        {sections.map((section, i) => (
+          <div key={i} className={`lg:transition-[max-height] lg:transition-[opacity] lg:duration-300 ${i < 4 || seeMore ? "lg:opacity-1" : "lg:opacity-0"}`}>
+            <Section
+              title={section.title}
+              subtitle={section.subtitle}
+              position={section.position}
+              data={section.data}
+              dates={section.dates}
+              externalLink={section.externalLink}
+              internalLink={section.internalLink}
+              key={i}
+            />
+          </div>
+        ))}
+      </div>
+      <div className="w-full text-center pt-2">
+        <a
+          className="invisible w-full text-center lg:visible lg:mb-6"
+          onClick={() => setSeeMore(!seeMore)}
+        >
+          <FontAwesomeIcon
+            className="text-l"
+            icon={seeMore ? faArrowUp : faArrowDown}
+          />
+          {seeMore ? " See Less" : " See More"}
+        </a>
+      </div>
+    </>
   );
 }

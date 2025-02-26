@@ -50,6 +50,7 @@ export default function Header() {
       <div
         onMouseOver={() => setMouseOver(true)}
         onMouseOut={() => setMouseOver(false)}
+        className="pb-4"
       >
         <div className="text-md flex justify-center space-x-3 pt-4 lg:text-lg w-full">
           <div>
@@ -68,12 +69,12 @@ export default function Header() {
         </div>
       </div>
 
-      <div className="mt-4 flex justify-center text-2xl text-emerald-600">
+      <div className="mt-2 flex justify-center text-2xl text-emerald-600">
         <a href="mailto:remy@arneson.dev" data-umami-event="Email link">
           remy@arneson.dev
         </a>
       </div>
-      <div className="mt-4 block lg:mt-0 lg:hidden">
+      <div className="block mt-2 lg:mt-0 lg:hidden">
         <ExternalLinks />
       </div>
     </header>

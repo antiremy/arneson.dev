@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
+import "./App.css";
 
 import Root from "./components/Root.tsx";
-
-import "./App.css";
 
 function App() {
   return <Root />;

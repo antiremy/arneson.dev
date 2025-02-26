@@ -5,7 +5,7 @@ import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 interface SectionProps {
   title: string;
-  subtitle: string;
+  subtitle: JSX.Element;
   position: string;
   dates: string;
   externalLink: string | undefined;
@@ -79,7 +79,8 @@ export default function Section(props: SectionProps) {
           <FontAwesomeIcon className="pl-2 text-xl" icon={faArrowRight} />
         </div>
         <div className="pt-0.5 text-lg">{props.dates}</div>
-        <div className="pt-4 text-xl">{props.subtitle}</div>
+        <div className="pt-4">{props.subtitle}</div>
+
       </div>
       {showModal && (
         <div
