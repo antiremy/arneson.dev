@@ -1,6 +1,5 @@
 import Images from "./Images/Images.tsx";
 import Section from "./Section.tsx";
-import { useState } from "react";
 
 const sections = [
   {
@@ -129,7 +128,7 @@ export default function Portfolio(opts: PortfolioArgs) {
 
   return (
       <div
-        className={`lg:duration-500 z-30 mx-auto mt-6 grid grid-flow-row gap-6 lg:grid-cols-2 lg:transition-[max-height] ${seeMore ? "lg:max-h-[56rem] overflow-y-scroll" : "lg:max-h-[28rem] overflow-hidden"}`}
+        className={`lg:duration-500 z-30 mx-auto mt-6 grid grid-flow-row gap-6 lg:grid-cols-2 lg:transition-[max-height] ${seeMore ? "lg:max-h-[56rem]" : "lg:max-h-[28rem] overflow-hidden"}`}
       >
         {sections.map((section, i) => (
           <div key={i} className={`lg:transition-[opacity] lg:duration-300 ${i < 4 || seeMore ? "lg:opacity-100" : "lg:opacity-0"}`}>

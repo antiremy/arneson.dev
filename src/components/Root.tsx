@@ -7,7 +7,7 @@ import Header from "./Header/Header.tsx";
 import Portfolio from "./Portfolio/Portfolio.tsx";
 
 export default function Root() {
-  const [darkMode, setIsDark] = useState(
+  const [darkMode] = useState(
     window.matchMedia &&
       window.matchMedia("(prefers-color-scheme: dark)").matches,
   );
@@ -24,7 +24,7 @@ export default function Root() {
       <div className="mt-6 lg:mt-auto">
         <Header />
       </div>
-      <div className="z-30 max-h-full max-w-4xl lg:overflow-y-scroll">
+      <div className="z-30 scrollbar max-h-full max-w-4xl lg:overflow-y-auto overflow-x-hidden">
         <Portfolio seeMore={seeMore} setSeeMore={setSeeMore} />
       </div>
       <div className="w-full pt-2 text-center">
