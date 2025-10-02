@@ -67,20 +67,20 @@ interface OpenWeatherCityInfo {
 const cityLookupList = JSON.parse(
   fs
     .readFileSync(process.cwd() + "/src/app/api/weather/city.list.min.json")
-    .toString()
+    .toString(),
 );
 
 function getCityId(
   city: string | null,
   state: string | null,
-  country: string | null
-): bigint | null {
+  country: string | null,
+): number | null {
   if (city !== null && state !== null && country !== null) {
     const cityLookup = cityLookupList.find(
       (cityInfo: OpenWeatherCityInfo) =>
         cityInfo.name === city &&
         cityInfo.state === state &&
-        cityInfo.country === country
+        cityInfo.country === country,
     );
     return cityLookup ? cityLookup.id : null;
   }
@@ -88,32 +88,37 @@ function getCityId(
 }
 
 async function getWeather(
-  id: bigint | null
-): Promise<OpenWeatherApiGroupResponse | null> {
+  id: number | null,
+): Promise<WeatherData | null> {
   try {
     if (process.env.OPEN_WEATHER_API_KEY) {
       const res = await fetch(
-        `https://api.openweathermap.org/data/2.5/group?units=imperial&appid=${process.env.OPEN_WEATHER_API_KEY}&lang=en&id=4155966${
-          id ? "," + id : ""
-        }`
+        `https://api.openweathermap.org/data/2.5/weather?units=imperial&appid=${process.env.OPEN_WEATHER_API_KEY}&lang=en&id=${id}`,
+        { next: { revalidate: 900 } },
       );
-    
+
       if (!res.ok) {
         console.error("Failed to get weather data");
       }
-    
-      return res.json();
+
+      const resp = await res.json();
+      if (resp.cod === '400') {
+        console.error(`Error getting city data: ${resp.message}`);
+        return null;
+      }
+
+      return resp;
     }
-  } catch(e) {
-    console.error(e)
+  } catch (e) {
+    console.error(e);
   }
-  return null
+  return null;
 }
 
 function getLocationString(
   city: string | null,
   state: string | null,
-  country: string | null
+  country: string | null,
 ): string {
   var returnStr = "";
   if (city) {
@@ -141,25 +146,26 @@ export async function GET(request: Request) {
   const state = headersList.get("Cf-Region-Code");
   const country = headersList.get("Cf-Ipcountry");
 
-  const weather = await getWeather(getCityId(city, state, country));
+  const myWeather = await getWeather(4155966); // Fort Lauderdale, FL
+  const userWeather = await getWeather(getCityId(city, state, country));
 
-  var response = {local: {}, remington: {}}
+  var response = { local: {}, remington: {} };
 
-  if (weather?.list[0]) {
+  if (myWeather) {
     response.remington = {
       location: "Fort Lauderdale, FL",
-      temp: weather.list[0].main.temp,
-      condition_desc: weather.list[0].weather[0].description,
-      condition_id: weather.list[0].weather[0].id,
-    }
+      temp: myWeather.main.temp,
+      condition_desc: myWeather.weather[0].description,
+      condition_id: myWeather.weather[0].id,
+    };
   }
 
-  if (weather?.list[1]) {
+  if (userWeather) {
     response.local = {
       location: getLocationString(city, state, country),
-      temp: weather.list[1].main.temp,
-      condition_desc: weather.list[1].weather[0].description,
-      condition_id: weather.list[1].weather[0].id,
+      temp: userWeather.main.temp,
+      condition_desc: userWeather.weather[0].description,
+      condition_id: userWeather.weather[0].id,
     };
   }
 
