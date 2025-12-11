@@ -145,9 +145,14 @@ export async function GET(request: Request) {
   const city = headersList.get("Cf-Ipcity");
   const state = headersList.get("Cf-Region-Code");
   const country = headersList.get("Cf-Ipcountry");
+  var promises = [getWeather(4155966)]// Fort Lauderdale, FL
 
-  const myWeather = await getWeather(4155966); // Fort Lauderdale, FL
-  const userWeather = await getWeather(getCityId(city, state, country));
+  const cityId = getCityId(city, state, country)
+  if (cityId) {
+    promises.push(getWeather(cityId))
+  }
+
+  const [myWeather, userWeather] = await Promise.all(promises)
 
   var response = { local: {}, remington: {} };
 
