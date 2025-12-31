@@ -1,26 +1,53 @@
-import Loading from "./Loading";
-import type { Metadata } from "next";
+import Loading from "./loading";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { Suspense } from "react";
+import colors from "tailwindcss/colors";
+
+import "./global.css";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { ViewTransitions } from "next-view-transitions";
+import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
   title: "Remington Arneson",
-  description: "Personal website",
+  description:
+    "A software engineer specializing in web development and reverse engineering",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export const viewport: Viewport = {
+  colorScheme: "light dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: colors.white }, // Light mode color
+    { media: "(prefers-color-scheme: dark)", color: colors.gray["800"] }, // Dark mode color
+  ],
+};
+
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="lg:h-full bg-white dark:bg-gray-800">
-      <body className="overflow-x-hidden lg:h-full lg:overflow-y-hidden bg-white dark:bg-gray-800">
-        <div id="root" className="bg-white dark:bg-gray-800">
-          <Suspense fallback={<Loading />}>{children}</Suspense>
-          <Script src="https://analytics.remy.lol/script.js" data-website-id="371ca0ca-bed0-4b09-a25d-f14cbaed47c5"/>
-        </div>
-      </body>
-    </html>
+    <ViewTransitions>
+      <html
+        suppressHydrationWarning
+        lang="en"
+        className="bg-white dark:bg-gray-800"
+      >
+        <body className="overflow-x-hidden lg:overflow-y-hidden">
+          <ThemeProvider attribute="class">
+            <div id="root" className="flex flex-col items-center">
+              <Suspense fallback={<Loading />}>{children}</Suspense>
+              <Script
+                src="https://analytics.remy.lol/script.js"
+                data-website-id="371ca0ca-bed0-4b09-a25d-f14cbaed47c5"
+              />
+            </div>
+          </ThemeProvider>
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }
+// div
+//       ref={ref}
+//       className={`flex h-full w-full flex-col items-center justify-center ${
+//         darkMode ? "dark bg-gray-800 text-white" : "bg-white text-black"
+//       } ${seeMore ? "" : "lg:h-screen"}`}

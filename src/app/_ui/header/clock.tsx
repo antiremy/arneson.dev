@@ -1,6 +1,8 @@
+"use client";
+
 import { useEffect, useState } from "react";
 
-import "./Clock.css";
+import "./clock.css";
 
 const months = [
   "January",
@@ -68,7 +70,10 @@ export default function Clock(props: { mouseOver: boolean }) {
   function getTimeString() {
     return (
       <>
-        <span className="inline-block min-w-[56px] max-w-[56px]">
+        <span
+          suppressHydrationWarning
+          className="inline-block max-w-[56px] min-w-[56px]"
+        >
           {`${(now.getHours() > 12 ? now.getHours() % 12 : now.getHours())
             .toString()
             .padStart(2, "0")}:${now
@@ -104,6 +109,7 @@ export default function Clock(props: { mouseOver: boolean }) {
       <div className="animate relative mr-1 size-5 rounded-[100px] border border-black bg-white dark:border-0">
         <div
           className="hour"
+          suppressHydrationWarning
           style={{
             transform: `rotate(${getHourHand()}deg)`,
             transition: getHourHand() === 0 ? "all 0.0s" : "transform .95s",
@@ -111,6 +117,7 @@ export default function Clock(props: { mouseOver: boolean }) {
         ></div>
         <div
           className="minute"
+          suppressHydrationWarning
           style={{
             transform: `rotate(${getMinuteHand()}deg)`,
             transition: getMinuteHand() === 0 ? "all 0.0s" : "transform .95s",
@@ -118,13 +125,14 @@ export default function Clock(props: { mouseOver: boolean }) {
         ></div>
         <div
           className="second"
+          suppressHydrationWarning
           style={{
             transform: `rotate(${getSecondHand()}deg)`,
             transition: getSecondHand() === 0 ? "all 0.0s" : "transform .95s",
           }}
         ></div>
       </div>
-      <div>
+      <div suppressHydrationWarning>
         {getDate()} • {getTimeString()}
       </div>
     </div>

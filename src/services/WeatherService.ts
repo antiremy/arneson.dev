@@ -1,72 +1,13 @@
-"use server";
-
-import { NextResponse } from "next/server";
-import { headers } from "next/headers";
-import fs from "fs";
-
-interface OpenWeatherApiGroupResponse {
-  cnt: number;
-  list: WeatherData[];
-}
-
-interface WeatherData {
-  coord: {
-    lon: number;
-    lat: number;
-  };
-  weather: {
-    id: number;
-    main: string;
-    description: string;
-    icon: string;
-  }[];
-  base: string;
-  main: {
-    temp: number;
-    feels_like: number;
-    temp_min: number;
-    temp_max: number;
-    pressure: number;
-    humidity: number;
-    sea_level: number;
-    grnd_level: number;
-  };
-  visibility: number;
-  wind: {
-    speed: number;
-    deg: number;
-  };
-  clouds: {
-    all: number;
-  };
-  dt: bigint;
-  sys: {
-    type: number;
-    id: number;
-    country: string;
-    sunrise: bigint;
-    sunset: bigint;
-  };
-  timezone: bigint;
-  id: bigint;
-  name: string;
-  cod: number;
-}
-
-interface OpenWeatherCityInfo {
-  id: bigint;
-  name: string;
-  state: string;
-  country: string;
-  coord: {
-    lon: number;
-    lat: number;
-  };
-}
+import fs from "node:fs";
+import {
+  OpenWeatherCityInfo,
+  WeatherData,
+  WeatherResponse,
+} from "../app/_ui/types";
 
 const cityLookupList = JSON.parse(
   fs
-    .readFileSync(process.cwd() + "/src/app/api/weather/city.list.min.json")
+    .readFileSync(process.cwd() + "/src/services/city.list.min.json")
     .toString(),
 );
 
@@ -87,9 +28,7 @@ function getCityId(
   return null;
 }
 
-async function getWeather(
-  id: number | null,
-): Promise<WeatherData | null> {
+async function getWeather(id: number | null): Promise<WeatherData | null> {
   try {
     if (process.env.OPEN_WEATHER_API_KEY) {
       const res = await fetch(
@@ -102,7 +41,7 @@ async function getWeather(
       }
 
       const resp = await res.json();
-      if (resp.cod === '400') {
+      if (resp.cod === "400") {
         console.error(`Error getting city data: ${resp.message}`);
         return null;
       }
@@ -140,21 +79,24 @@ function getLocationString(
   return returnStr;
 }
 
-export async function GET(request: Request) {
-  const headersList = request.headers;
-  const city = headersList.get("Cf-Ipcity");
-  const state = headersList.get("Cf-Region-Code");
-  const country = headersList.get("Cf-Ipcountry");
-  var promises = [getWeather(4155966)]// Fort Lauderdale, FL
+async function getSimplifiedWeatherData(
+  city: string | null,
+  state: string | null,
+  country: string | null,
+): Promise<WeatherResponse> {
+  var promises = [getWeather(4155966)]; // Fort Lauderdale, FL
 
-  const cityId = getCityId(city, state, country)
+  const cityId = getCityId(city, state, country);
   if (cityId) {
-    promises.push(getWeather(cityId))
+    promises.push(getWeather(cityId));
   }
 
-  const [myWeather, userWeather] = await Promise.all(promises)
+  const [myWeather, userWeather] = await Promise.all(promises);
 
-  var response = { local: {}, remington: {} };
+  var response: WeatherResponse = {
+    local: {},
+    remington: {},
+  } as WeatherResponse;
 
   if (myWeather) {
     response.remington = {
@@ -174,5 +116,7 @@ export async function GET(request: Request) {
     };
   }
 
-  return NextResponse.json(response);
+  return response;
 }
+
+export { getCityId, getWeather, getLocationString, getSimplifiedWeatherData };

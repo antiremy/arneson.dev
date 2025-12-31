@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .scrollbar {
+    scrollbar-color: rgba(255, 255, 255, 0.7) rgba(0, 0, 0, 0);
+    scrollbar-width: thin;
+    scrollbar-gutter: stable both-edges;
+  }
+}
+
+@media (min-width: 768px) {
+  html,
+  body,
+  #root {
+    height: 100%;
+    margin: 0;
+  }
+}

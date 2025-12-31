@@ -1,11 +1,9 @@
 import {
-  faBluesky,
   faGithub,
   faLinkedinIn,
-  faXTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 
-import IconLink from "./IconLink.tsx";
+import IconLink from "./iconLink.tsx";
 
 export default function ExternalLinks() {
   return (
@@ -21,18 +19,6 @@ export default function ExternalLinks() {
         href="https://github.com/antiremy"
         title="Go to GitHub"
         event="GitHub button"
-      />
-      <IconLink
-        icon={faBluesky}
-        href="https://bsky.app/profile/remy.lol"
-        title="Go to Twitter"
-        event="Twitter button"
-      />
-      <IconLink
-        icon={faXTwitter}
-        href="https://twitter.com/RemingtonArn"
-        title="Go to Twitter"
-        event="Twitter button"
       />
     </div>
   );

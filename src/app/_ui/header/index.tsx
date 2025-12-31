@@ -1,40 +1,20 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
-import Clock from "./Clock.tsx";
-import Weather from "./Weather.tsx";
-import ExternalLinks from "../ExternalLinks.tsx";
+import Clock from "./clock.tsx";
+import Weather from "./weather.tsx";
+import ExternalLinks from "../externalLinks.tsx";
+import { SimplifiedWeatherData, WeatherResponse } from "../types.ts";
 
-interface WeatherResponse {
-  local: WeatherData | undefined;
-  remington: WeatherData;
+interface HeaderProps {
+  weather: WeatherResponse;
 }
 
-interface WeatherData {
-  location: string;
-  temp: number;
-  condition_desc: string;
-  condition_id: number;
-}
-
-export default function Header() {
-  const [weather, setWeather] = useState<WeatherResponse>();
-  const [current, setCurrent] = useState<WeatherData>();
+export default function Header({ weather }: HeaderProps) {
+  const [current, setCurrent] = useState<SimplifiedWeatherData>();
   const [mouseOver, setMouseOver] = useState(false);
-
-  useEffect(() => {
-    !weather &&
-      fetch("/api/weather")
-        .then(async (resp) => {
-          if (resp.status === 200) {
-            var data = await resp.json();
-            setWeather(data);
-          }
-        })
-        .catch((error) => {
-          console.error("Error fetching weather:", error);
-        });
-  }, []);
 
   useEffect(() => {
     mouseOver && weather?.local?.temp
@@ -52,9 +32,9 @@ export default function Header() {
         onMouseOut={() => setMouseOver(false)}
         className="pb-4"
       >
-        <div className="text-md flex justify-center space-x-3 pt-4 lg:text-lg w-full">
+        <div className="text-md flex w-full justify-center space-x-3 pt-4 text-sm">
           <div>
-            <FontAwesomeIcon icon={faLocationDot} />
+            <FontAwesomeIcon className="lg:text-lg" icon={faLocationDot} />
             &nbsp;{current?.location}
           </div>
 
@@ -70,11 +50,11 @@ export default function Header() {
       </div>
 
       <div className="mt-2 flex justify-center text-2xl text-emerald-600">
-        <a href="mailto:remy@arneson.dev" data-umami-event="Email link">
-          remy@arneson.dev
+        <a href="mailto:remington@arneson.dev" data-umami-event="Email link">
+          remington@arneson.dev
         </a>
       </div>
-      <div className="block mt-2 lg:mt-0 lg:hidden">
+      <div className="mt-2 block lg:mt-0 lg:hidden">
         <ExternalLinks />
       </div>
     </header>

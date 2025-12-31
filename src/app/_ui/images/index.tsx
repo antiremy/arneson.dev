@@ -1,10 +1,10 @@
-import MonitrPingsTable from "./Original/MonitrPingsTable.png";
-import MonitrSearchMobile from "./Original/MonitrStoreSearch.png";
-import MonitrNotificationsMobile from "./Original/MonitrNotifications.png";
-import WrathTasks from "./Original/WrathTasks.png";
-import WrathDashboard from "./Original/WrathDashboard.png";
+import MonitrPingsTable from "./originals/MonitrPingsTable.png";
+import MonitrSearchMobile from "./originals/MonitrStoreSearch.png";
+import MonitrNotificationsMobile from "./originals/MonitrNotifications.png";
+import WrathTasks from "./originals/WrathTasks.png";
+import WrathDashboard from "./originals/WrathDashboard.png";
 
-import Image from "./Image";
+import Image from "./image";
 
 export default {
   MonitrPingsTable: <Image src={MonitrPingsTable} alt="Monitr Desktop Pings" />,
