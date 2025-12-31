@@ -46,8 +46,3 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     </ViewTransitions>
   );
 }
-// div
-//       ref={ref}
-//       className={`flex h-full w-full flex-col items-center justify-center ${
-//         darkMode ? "dark bg-gray-800 text-white" : "bg-white text-black"
-//       } ${seeMore ? "" : "lg:h-screen"}`}
