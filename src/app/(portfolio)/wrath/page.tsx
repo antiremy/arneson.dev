@@ -15,24 +15,25 @@ export default function Page() {
   return (
     <div id="wrath" className="flex flex-col gap-2 pt-4 pb-12">
       <div>
-        I partnered with another developer in 2018 to work on Wrath, an
-        invite-only checkout automation software. I was bought out of Wrath in
-        2021.
+        In 2018, I joined Wrath as an early partner—an invite-only checkout
+        automation platform that redefined how sneakerheads acquired limited
+        releases. I exited the company in 2021.
       </div>
       <div>
-        Wrath was an application created to do one thing: help users acquire
-        high-demand shoes for retail price. What initially started out as a
-        Chrome extension supporting Shopify-managed storefronts, grew to
-        encompass any major website doing similar high-demand drops.
+        Wrath solved a singular problem: securing high-demand sneakers at retail
+        price before they sold out. What began as a Chrome extension targeting
+        Shopify storefronts evolved into a sophisticated automation suite
+        supporting every major retailer running limited drops.
       </div>
       <div className="grid grid-cols-1 place-items-center gap-2">
         {Images.WrathDashboard}
         {Images.WrathTasks}
       </div>
       <div>
-        Wrath has left an incredible mark on the e-commerce world with millions
-        of checkouts (and declines) across hundreds of sites. It has continued
-        to advance, retaining thousands of monthly active users.
+        The platform processed millions of checkout attempts across hundreds of
+        sites, becoming a defining force in the streetwear and sneaker resale
+        economy. Wrath operated until October 2023, maintaining thousands of
+        active subscribers throughout its run.
       </div>
     </div>
   );

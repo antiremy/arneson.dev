@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState, type JSX } from "react";
-import { usePathname } from "next/navigation";
+import { useEffect, useRef, type JSX } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "next-view-transitions";
 
 interface SectionProps {

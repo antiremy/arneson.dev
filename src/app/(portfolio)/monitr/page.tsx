@@ -15,16 +15,18 @@ export default function Page() {
   return (
     <div id="monitr" className="flex flex-col gap-2 pt-4 pb-12">
       <div>
-        After noticing how none of my friends knew when console restocks
-        happened, I founded Monitr (formerly Monitr.gg) in 2021 to give access
-        to high-quality e-commerce monitoring tools to anyone.
+        When I watched my friends constantly miss PlayStation 5 restocks, I saw
+        an opportunity to level the playing field. In 2021, I founded Monitr
+        (formerly Monitr.gg) to democratize access to enterprise-grade product
+        monitoring.
       </div>
+
       <div>
-        Monitr was a platform that kept track of thousands of products across
-        200+ websites. Monitr's goal was to help any user get any item they
-        want, being developed during a time where PlayStation 5s were never in
-        stock for more than a few seconds. This platform was extensible; setting
-        up to allow new use-cases for this constant stream of product data.
+        Monitr tracked inventory across 200+ retailers in real-time, monitoring
+        thousands of products simultaneously. Built during the peak of the
+        pandemic supply shortage (when PS5s sold out in seconds), the platform
+        helped everyday shoppers compete with bot networks and resellers. The
+        architecture was designed for speed and extensibility.
       </div>
 
       <div className="grid grid-cols-2 place-items-center gap-2 px-0 py-2">
@@ -36,11 +38,14 @@ export default function Page() {
       </div>
 
       <div>
-        Monitr's users were notified of restocks and new products across push
-        notifications (Android, iOS, browser), webhooks (Discord), and
-        websockets within a second of it being detected. This resulted in
-        successful checkouts for coveted shoes, gaming consoles, and graphics
-        cards.
+        Sub-second detection fed a multi-channel notification system: native
+        push notifications (iOS, Android, web), Discord webhooks, and WebSocket
+        streams. This real-time pipeline turned scarcity into opportunity,
+        helping users successfully purchase hard-to-find sneakers, gaming
+        consoles, and graphics cards. Beyond restocks, Monitr's infrastructure
+        was built to scale to new use cases, turning a constant stream of
+        e-commerce data into actionable intelligence for anyone willing to act
+        fast.
       </div>
     </div>
   );
