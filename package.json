@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "publish": "docker build -t 'arneson-dev' . --platform linux/amd64 && docker tag arneson-dev 192.168.2.231:5000/arneson-dev && docker push 192.168.2.231:5000/arneson-dev"
+    "start": "next start"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",

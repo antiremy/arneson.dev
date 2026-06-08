@@ -9,7 +9,7 @@ export default function Page() {
 
   useEffect(() => {
     setTitle("Wrath (2018-2021)");
-  }, []);
+  }, [setTitle]);
 
   return (
     <div id="wrath" className="flex flex-col gap-2 pt-4 pb-12">
