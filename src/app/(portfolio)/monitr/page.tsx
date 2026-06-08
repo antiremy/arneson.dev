@@ -3,7 +3,6 @@
 import { useEffect } from "react";
 import { usePageData } from "../../../context/pageDataContext";
 import Images from "../../_ui/images";
-import { StickyTitle } from "../_ui/stickyTitle";
 
 export default function Page() {
   const { setTitle } = usePageData();
