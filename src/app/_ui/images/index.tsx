@@ -6,7 +6,7 @@ import WrathDashboard from "./originals/WrathDashboard.png";
 
 import Image from "./image";
 
-export default {
+const images = {
   MonitrPingsTable: <Image src={MonitrPingsTable} alt="Monitr Desktop Pings" />,
   MonitrSearchMobile: (
     <Image src={MonitrSearchMobile} alt="Monitr Mobile Search" />
@@ -17,3 +17,5 @@ export default {
   WrathTasks: <Image src={WrathTasks} alt="Wrath Tasks" />,
   WrathDashboard: <Image src={WrathDashboard} alt="Wrath Dashboard" />,
 };
+
+export default images;

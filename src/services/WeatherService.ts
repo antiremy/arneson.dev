@@ -59,7 +59,7 @@ function getLocationString(
   state: string | null,
   country: string | null,
 ): string {
-  var returnStr = "";
+  let returnStr = "";
   if (city) {
     returnStr += city;
   }
@@ -84,7 +84,7 @@ async function getSimplifiedWeatherData(
   state: string | null,
   country: string | null,
 ): Promise<WeatherResponse> {
-  var promises = [getWeather(4155966)]; // Fort Lauderdale, FL
+  const promises = [getWeather(4155966)]; // Fort Lauderdale, FL
 
   const cityId = getCityId(city, state, country);
   if (cityId) {
@@ -93,7 +93,7 @@ async function getSimplifiedWeatherData(
 
   const [myWeather, userWeather] = await Promise.all(promises);
 
-  var response: WeatherResponse = {
+  const response: WeatherResponse = {
     local: {},
     remington: {},
   } as WeatherResponse;

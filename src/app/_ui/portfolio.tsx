@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import Section from "./section.tsx";
 
 const sections = [
@@ -6,7 +7,7 @@ const sections = [
     position: "Software Engineer II",
     subtitle: (
       <div className="text-xl">
-        "Help everyone home" - Servicing one in six mortgages in America
+        {'"Help everyone home" - Servicing one in six mortgages in America'}
       </div>
     ),
     dates: "Oct 2024 - Present",
@@ -42,7 +43,7 @@ const sections = [
     position: "Software Engineer",
     subtitle: (
       <div className="text-xl">
-        "What's in your wallet?" - America's 4th Largest Credit Card Issuer
+        {`"What's in your wallet?" - America's 4th Largest Credit Card Issuer`}
       </div>
     ),
     dates: "Aug 2018 - Nov 2020",
@@ -52,7 +53,7 @@ const sections = [
 
 interface PortfolioArgs {
   seeMore: boolean;
-  setSeeMore: Function;
+  setSeeMore: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function Portfolio(opts: PortfolioArgs) {

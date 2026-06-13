@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import Clock from "./clock.tsx";
@@ -13,14 +13,10 @@ interface HeaderProps {
 }
 
 export default function Header({ weather }: HeaderProps) {
-  const [current, setCurrent] = useState<SimplifiedWeatherData>();
   const [mouseOver, setMouseOver] = useState(false);
 
-  useEffect(() => {
-    mouseOver && weather?.local?.temp
-      ? setCurrent(weather.local)
-      : setCurrent(weather?.remington);
-  }, [weather, mouseOver]);
+  const current: SimplifiedWeatherData | undefined =
+    mouseOver && weather?.local?.temp ? weather.local : weather?.remington;
 
   return (
     <header className="items-center justify-center">

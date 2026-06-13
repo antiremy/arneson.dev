@@ -1,7 +1,6 @@
 "use server";
 
 import React from "react";
-import { ThemeProvider } from "next-themes";
 import Footer from "./_ui/footer";
 import Header from "./_ui/header";
 import { getSimplifiedWeatherData } from "../services/WeatherService";
