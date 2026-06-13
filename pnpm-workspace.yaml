@@ -5,4 +5,4 @@ allowBuilds:
 blockExoticSubdeps: false
 overrides:
   postcss@<8.5.10: '>=8.5.15'
-  vite: ^7.3.5
+  vite: ^8.0.16
