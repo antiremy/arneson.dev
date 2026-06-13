@@ -9,6 +9,9 @@ ARG NODE_VERSION=24.16.0-slim
 
 FROM node:${NODE_VERSION} AS dependencies
 
+ENV NPM_CONFIG_REGISTRY=https://nexus.local.remy.lol/repository/registry.npmjs.org-proxy
+ENV COREPACK_NPM_REGISTRY=https://nexus.local.remy.lol/repository/registry.npmjs.org-proxy
+
 # Set working directory
 WORKDIR /app
 
