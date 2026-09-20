@@ -53,7 +53,7 @@ function getLocationString(
     returnStr += state;
   }
   if (country && (country !== "US" || (city === null && state === null))) {
-    if (state) {
+    if (returnStr) {
       returnStr += ", ";
     }
     returnStr += country;
@@ -100,7 +100,7 @@ async function getSimplifiedWeatherData(
 
   const response: WeatherResponse = {
     local: undefined,
-    remington: {} as WeatherResponse["remington"],
+    remington: undefined,
   };
 
   if (myWeather) {
@@ -112,7 +112,7 @@ async function getSimplifiedWeatherData(
     };
   }
 
-  if (visitorWeather && visitorName) {
+  if (visitorWeather) {
     response.local = {
       location: visitorName,
       temp: visitorWeather.main.temp,

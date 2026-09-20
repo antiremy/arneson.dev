@@ -20,21 +20,36 @@ function nth(d: number) {
   }
 }
 
+// Only two timeZone values are ever passed in (home vs. the visitor's), so
+// caching the formatter avoids rebuilding it on every render of a
+// once-per-second tick.
+const formatterCache = new Map<string, Intl.DateTimeFormat>();
+
+function getFormatter(timeZone: string | undefined): Intl.DateTimeFormat {
+  const key = timeZone ?? "";
+  let formatter = formatterCache.get(key);
+  if (!formatter) {
+    formatter = new Intl.DateTimeFormat("en-US", {
+      timeZone,
+      hourCycle: "h23",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      timeZoneName: "short",
+    });
+    formatterCache.set(key, formatter);
+  }
+  return formatter;
+}
+
 // Reads the wall-clock fields for `date` as they appear in `timeZone`, rather
 // than round-tripping through a locale string, which relies on non-standard
 // Date parsing and cannot report the target zone's DST state.
 function getZonedParts(date: Date, timeZone: string | undefined) {
-  const parts = new Intl.DateTimeFormat("en-US", {
-    timeZone,
-    hourCycle: "h23",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    timeZoneName: "short",
-  }).formatToParts(date);
+  const parts = getFormatter(timeZone).formatToParts(date);
 
   const find = (type: Intl.DateTimeFormatPartTypes) =>
     parts.find((part) => part.type === type)?.value ?? "";

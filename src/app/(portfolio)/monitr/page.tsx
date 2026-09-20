@@ -1,14 +1,7 @@
-import type { Metadata } from "next";
 import Images from "../../_ui/images";
-import { openGraph } from "../../_metadata";
-import { projectHeading, projects } from "../_projects";
+import { projectMetadata } from "../_projects";
 
-export const metadata: Metadata = {
-  title: projectHeading("monitr"),
-  description: projects.monitr.description,
-  alternates: { canonical: "/monitr" },
-  openGraph: openGraph("/monitr"),
-};
+export const metadata = projectMetadata("monitr");
 
 export default function Page() {
   return (

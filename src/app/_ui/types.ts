@@ -49,7 +49,7 @@ interface WeatherData {
 
 interface WeatherResponse {
   local: SimplifiedWeatherData | undefined;
-  remington: SimplifiedWeatherData;
+  remington: SimplifiedWeatherData | undefined;
 }
 
 interface SimplifiedWeatherData {

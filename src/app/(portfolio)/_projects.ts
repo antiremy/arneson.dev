@@ -1,3 +1,6 @@
+import type { Metadata } from "next";
+import { openGraph } from "../_metadata";
+
 // Single source of truth for the project pages: drives each page's <title> and
 // description as well as the label in the fixed header bar.
 export const projects = {
@@ -24,4 +27,14 @@ export function isProjectSlug(slug: string): slug is ProjectSlug {
 export function projectHeading(slug: ProjectSlug): string {
   const { title, years } = projects[slug];
   return `${title} (${years})`;
+}
+
+export function projectMetadata(slug: ProjectSlug): Metadata {
+  const path = `/${slug}`;
+  return {
+    title: projectHeading(slug),
+    description: projects[slug].description,
+    alternates: { canonical: path },
+    openGraph: openGraph(path),
+  };
 }
