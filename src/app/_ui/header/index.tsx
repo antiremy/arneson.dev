@@ -20,9 +20,9 @@ export default function Header({ weather }: HeaderProps) {
 
   return (
     <header className="items-center justify-center">
-      <div className="text-center text-4xl font-bold lg:text-6xl">
+      <h1 className="text-center text-4xl font-bold lg:text-6xl">
         Remington Arneson
-      </div>
+      </h1>
       <div
         onMouseOver={() => setMouseOver(true)}
         onMouseOut={() => setMouseOver(false)}

@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 
 export default function ClickableImage(props: {
@@ -8,25 +8,44 @@ export default function ClickableImage(props: {
   alt: string;
 }) {
   const [showOriginal, setShowOriginal] = useState(false);
+
+  useEffect(() => {
+    if (!showOriginal) return;
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setShowOriginal(false);
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [showOriginal]);
+
   return (
     <>
-      <div onClick={() => setShowOriginal(true)} className="relative z-0">
+      <button
+        type="button"
+        onClick={() => setShowOriginal(true)}
+        className="relative z-0 cursor-pointer"
+        aria-label={`Enlarge ${props.alt}`}
+      >
         <Image
           src={props.src}
-          className="h-auto max-h-96 w-auto max-w-96 rounded-md drop-shadow-none transition hover:cursor-pointer hover:drop-shadow-glow"
+          className="hover:drop-shadow-glow h-auto max-h-96 w-auto max-w-96 rounded-md drop-shadow-none transition"
           alt={props.alt + " thumbnail"}
         />
-      </div>
+      </button>
       {showOriginal && (
         <div
-          className="fixed left-0 top-0 z-40 flex h-full w-screen items-center justify-center overflow-hidden bg-black/65"
+          role="dialog"
+          aria-modal="true"
+          aria-label={props.alt}
+          className="fixed top-0 left-0 z-40 flex h-full w-screen items-center justify-center overflow-hidden bg-black/65"
           onClick={() => setShowOriginal(false)}
         >
           <Image
             src={props.src}
-            className="max-h-screen w-auto py-2"
+            className="max-h-screen w-auto object-contain py-2"
             alt={props.alt}
-            objectFit="contain"
           />
         </div>
       )}
