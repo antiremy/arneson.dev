@@ -1,16 +1,16 @@
-"use client";
-
-import { useEffect } from "react";
-import { usePageData } from "../../../context/pageDataContext";
+import type { Metadata } from "next";
 import Images from "../../_ui/images";
+import { openGraph } from "../../_metadata";
+import { projectHeading, projects } from "../_projects";
+
+export const metadata: Metadata = {
+  title: projectHeading("wrath"),
+  description: projects.wrath.description,
+  alternates: { canonical: "/wrath" },
+  openGraph: openGraph("/wrath"),
+};
 
 export default function Page() {
-  const { setTitle } = usePageData();
-
-  useEffect(() => {
-    setTitle("Wrath (2018-2021)");
-  }, [setTitle]);
-
   return (
     <div id="wrath" className="flex flex-col gap-2 pt-4 pb-12">
       <div>

@@ -1,16 +1,16 @@
-"use client";
-
-import { useEffect } from "react";
-import { usePageData } from "../../../context/pageDataContext";
+import type { Metadata } from "next";
 import Images from "../../_ui/images";
+import { openGraph } from "../../_metadata";
+import { projectHeading, projects } from "../_projects";
+
+export const metadata: Metadata = {
+  title: projectHeading("monitr"),
+  description: projects.monitr.description,
+  alternates: { canonical: "/monitr" },
+  openGraph: openGraph("/monitr"),
+};
 
 export default function Page() {
-  const { setTitle } = usePageData();
-
-  useEffect(() => {
-    setTitle("Monitr (2021-2023)");
-  }, [setTitle]);
-
   return (
     <div id="monitr" className="flex flex-col gap-2 pt-4 pb-12">
       <div>
@@ -41,10 +41,10 @@ export default function Page() {
         push notifications (iOS, Android, web), Discord webhooks, and WebSocket
         streams. This real-time pipeline turned scarcity into opportunity,
         helping users successfully purchase hard-to-find sneakers, gaming
-        consoles, and graphics cards. Beyond restocks, Monitr&apos;s infrastructure
-        was built to scale to new use cases, turning a constant stream of
-        e-commerce data into actionable intelligence for anyone willing to act
-        fast.
+        consoles, and graphics cards. Beyond restocks, Monitr&apos;s
+        infrastructure was built to scale to new use cases, turning a constant
+        stream of e-commerce data into actionable intelligence for anyone
+        willing to act fast.
       </div>
     </div>
   );
