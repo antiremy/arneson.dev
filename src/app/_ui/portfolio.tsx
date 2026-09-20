@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
 import Section from "./section.tsx";
 
 const sections = [
@@ -51,22 +50,30 @@ const sections = [
   },
 ];
 
+// Cards past this index are hidden behind "See More" on the desktop layout.
+const COLLAPSED_COUNT = 4;
+
 interface PortfolioArgs {
   seeMore: boolean;
-  setSeeMore: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function Portfolio(opts: PortfolioArgs) {
-  const { seeMore } = opts;
-
+export default function Portfolio({ seeMore }: PortfolioArgs) {
   return (
     <div
+      id="portfolio-list"
       className={`z-30 mx-auto mt-6 grid grid-flow-row gap-6 lg:grid-cols-2 lg:transition-[max-height] lg:duration-500 ${seeMore ? "lg:max-h-224" : "overflow-hidden lg:max-h-112"}`}
     >
       {sections.map((section, i) => (
         <div
-          key={i}
-          className={`lg:transition-opacity lg:duration-300 ${i < 4 || seeMore ? "lg:opacity-100" : "lg:opacity-0"}`}
+          key={section.title}
+          // `invisible` (rather than opacity alone) keeps collapsed cards out of
+          // the tab order and accessibility tree; allow-discrete preserves the
+          // fade by deferring the visibility flip until the transition ends.
+          className={`lg:transition-[opacity,visibility] lg:transition-discrete lg:duration-300 ${
+            i < COLLAPSED_COUNT || seeMore
+              ? "lg:visible lg:opacity-100"
+              : "lg:invisible lg:opacity-0"
+          }`}
         >
           <Section
             title={section.title}
@@ -74,7 +81,6 @@ export default function Portfolio(opts: PortfolioArgs) {
             position={section.position}
             dates={section.dates}
             link={section.link}
-            key={i}
           />
         </div>
       ))}

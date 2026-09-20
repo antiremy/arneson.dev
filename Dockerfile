@@ -55,6 +55,16 @@ ENV CI=true
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED=1
 
+# Lint before building. `next build` already typechecks, so this closes the
+# remaining gap without assuming anything about the CI runner's toolchain.
+RUN if [ -f package-lock.json ]; then \
+    npm run lint; \
+  elif [ -f yarn.lock ]; then \
+    corepack enable yarn && yarn lint; \
+  elif [ -f pnpm-lock.yaml ]; then \
+    corepack enable pnpm && pnpm lint; \
+  fi
+
 # Build Next.js application
 # If you want to speed up Docker rebuilds, you can cache the build artifacts
 # by adding: --mount=type=cache,target=/app/.next/cache
