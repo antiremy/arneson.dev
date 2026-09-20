@@ -7,11 +7,25 @@ import colors from "tailwindcss/colors";
 import "./global.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { ViewTransitions } from "next-view-transitions";
+import { openGraph, siteDescription, siteName, siteUrl } from "./_metadata";
 
 export const metadata: Metadata = {
-  title: "Remington Arneson",
-  description:
-    "A software engineer specializing in web development and reverse engineering",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: siteName,
+    template: `%s • ${siteName}`,
+  },
+  description: siteDescription,
+  alternates: {
+    canonical: "/",
+  },
+  // og/twitter title and description are intentionally omitted throughout: Next
+  // fills them from each page's own title/description, so the project pages get
+  // their own card text without repeating it.
+  openGraph: openGraph("/"),
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export const viewport: Viewport = {
