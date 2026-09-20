@@ -55,14 +55,14 @@ ENV CI=true
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED=1
 
-# Lint before building. `next build` already typechecks, so this closes the
-# remaining gap without assuming anything about the CI runner's toolchain.
+# Lint and typecheck before building, so failures surface here with clear
+# step names instead of buried inside the build stage's own output.
 RUN if [ -f package-lock.json ]; then \
-    npm run lint; \
+    npm run lint && npm run typecheck; \
   elif [ -f yarn.lock ]; then \
-    corepack enable yarn && yarn lint; \
+    corepack enable yarn && yarn lint && yarn typecheck; \
   elif [ -f pnpm-lock.yaml ]; then \
-    corepack enable pnpm && pnpm lint; \
+    corepack enable pnpm && pnpm lint && pnpm typecheck; \
   fi
 
 # Build Next.js application
