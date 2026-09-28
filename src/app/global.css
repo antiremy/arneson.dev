@@ -3,6 +3,15 @@
 @theme {
   --drop-shadow-glow:
     0 0 5px rgb(255 255 255 / 0.35), 0 0 15px rgb(255 255 255 / 0.2);
+
+  --animate-fade-in: fade-in 300ms ease-out;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+  }
 }
 
 @layer utilities {
