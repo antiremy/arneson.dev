@@ -1,6 +1,6 @@
 "use client";
 
-import { JSX, useState } from "react";
+import { JSX, useEffect, useRef, useState } from "react";
 import Portfolio from "./portfolio";
 import Timeline from "./timeline";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,6 +18,12 @@ const views = [
 
 export function PortfolioWrapper(): JSX.Element {
   const [view, setView] = useState<View>("cards");
+  const scrollRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    scrollRef.current?.scrollTo(0, 0);
+  }, [view]);
+
   return (
     <>
       <div
@@ -45,7 +51,10 @@ export function PortfolioWrapper(): JSX.Element {
       </div>
       {/* The gap lives on the scroll container, not the list, so scrolled
           content clips below the toggle instead of right against it. */}
-      <main className="scrollbar z-30 mt-6 max-h-full max-w-4xl overflow-x-hidden px-2 lg:overflow-y-scroll">
+      <main
+        ref={scrollRef}
+        className="scrollbar z-30 mt-6 max-h-full max-w-4xl overflow-x-hidden px-2 lg:overflow-y-scroll"
+      >
         {/* Keying on the view remounts the wrapper so the fade replays on each
             switch. A plain CSS animation (rather than a view transition) stays
             clipped by the scroll container. */}
