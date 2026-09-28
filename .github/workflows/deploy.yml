@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - "**/*.md"
+      - ".vscode/**"
+      - ".github/dependabot.yml"
   workflow_dispatch:
 
 env:
