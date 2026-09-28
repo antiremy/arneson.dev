@@ -16,16 +16,19 @@ export default function Header({ weather }: HeaderProps) {
   const [mouseOver, setMouseOver] = useState(false);
 
   const current: SimplifiedWeatherData | undefined =
-    mouseOver && weather?.local?.temp ? weather.local : weather?.remington;
+    mouseOver && weather?.local ? weather.local : weather?.remington;
 
   return (
     <header className="items-center justify-center">
-      <div className="text-center text-4xl font-bold lg:text-6xl">
+      <h1 className="text-center text-4xl font-bold lg:text-6xl">
         Remington Arneson
-      </div>
+      </h1>
       <div
+        tabIndex={0}
         onMouseOver={() => setMouseOver(true)}
         onMouseOut={() => setMouseOver(false)}
+        onFocus={() => setMouseOver(true)}
+        onBlur={() => setMouseOver(false)}
         className="pb-4"
       >
         <div className="text-md flex w-full justify-center space-x-3 pt-4 text-sm">

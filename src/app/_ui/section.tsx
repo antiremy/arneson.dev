@@ -1,4 +1,4 @@
-import { useEffect, useRef, type JSX } from "react";
+import { type JSX } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "next-view-transitions";
@@ -18,22 +18,13 @@ export default function Section({
   dates,
   link,
 }: SectionProps) {
-  const noAnimation = useRef(true);
-
-  useEffect(() => {
-    if (noAnimation.current) {
-      noAnimation.current = false;
-      return;
-    }
-  });
-
   return (
-    <Link href={link}> 
+    <Link href={link}>
       <div
         className="flex h-52 w-full max-w-96 flex-col rounded-lg bg-slate-800/5 p-5 transition duration-300 hover:cursor-pointer hover:bg-slate-800/15 dark:bg-white/10 dark:hover:bg-white/25"
         data-umami-event={`${title} card`}
       >
-        <div className="text-xl font-semibold">{title} </div>
+        <h2 className="text-xl font-semibold">{title}</h2>
         <div className="pt-0.5 text-2xl font-bold">
           {position}
           <FontAwesomeIcon className="pl-2 text-xl" icon={faArrowRight} />

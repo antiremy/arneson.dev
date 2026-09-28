@@ -47,20 +47,9 @@ interface WeatherData {
   cod: number;
 }
 
-interface OpenWeatherCityInfo {
-  id: bigint;
-  name: string;
-  state: string;
-  country: string;
-  coord: {
-    lon: number;
-    lat: number;
-  };
-}
-
 interface WeatherResponse {
   local: SimplifiedWeatherData | undefined;
-  remington: SimplifiedWeatherData;
+  remington: SimplifiedWeatherData | undefined;
 }
 
 interface SimplifiedWeatherData {
@@ -73,7 +62,6 @@ interface SimplifiedWeatherData {
 export type {
   OpenWeatherApiGroupResponse,
   WeatherData,
-  OpenWeatherCityInfo,
   WeatherResponse,
   SimplifiedWeatherData,
 };

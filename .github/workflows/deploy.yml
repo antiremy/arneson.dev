@@ -11,8 +11,34 @@ env:
   IMAGE_NAME: arneson.dev
 
 jobs:
+  lint-and-typecheck:
+    runs-on: self-hosted
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.16.0
+
+      - name: Install dependencies
+        run: |
+          corepack enable pnpm
+          pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm typecheck
+
   build-and-push:
     runs-on: self-hosted
+    needs: lint-and-typecheck
     permissions:
       contents: read
 

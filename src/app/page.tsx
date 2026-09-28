@@ -1,5 +1,3 @@
-"use server";
-
 import React from "react";
 import Footer from "./_ui/footer";
 import Header from "./_ui/header";
@@ -9,10 +7,13 @@ import { PortfolioWrapper } from "./_ui/portfolioWrapper";
 
 export default async function Page() {
   const headersList = await headers();
-  const city = headersList.get("Cf-Ipcity");
-  const state = headersList.get("Cf-Region-Code");
-  const country = headersList.get("Cf-Ipcountry");
-  const weatherResponse = await getSimplifiedWeatherData(city, state, country);
+  const weatherResponse = await getSimplifiedWeatherData({
+    city: headersList.get("Cf-Ipcity"),
+    state: headersList.get("Cf-Region-Code"),
+    country: headersList.get("Cf-Ipcountry"),
+    latitude: headersList.get("Cf-Iplatitude"),
+    longitude: headersList.get("Cf-Iplongitude"),
+  });
 
   return (
     <>

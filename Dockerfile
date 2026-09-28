@@ -55,6 +55,10 @@ ENV CI=true
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED=1
 
+# Lint and typecheck run as a separate CI pipeline gate (see
+# .github/workflows/deploy.yml) before this image is ever built, so they are
+# not repeated here.
+
 # Build Next.js application
 # If you want to speed up Docker rebuilds, you can cache the build artifacts
 # by adding: --mount=type=cache,target=/app/.next/cache

@@ -7,12 +7,25 @@ import colors from "tailwindcss/colors";
 import "./global.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { ViewTransitions } from "next-view-transitions";
-import { ThemeProvider } from "next-themes";
+import { openGraph, siteDescription, siteName, siteUrl } from "./_metadata";
 
 export const metadata: Metadata = {
-  title: "Remington Arneson",
-  description:
-    "A software engineer specializing in web development and reverse engineering",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: siteName,
+    template: `%s • ${siteName}`,
+  },
+  description: siteDescription,
+  alternates: {
+    canonical: "/",
+  },
+  // og/twitter title and description are intentionally omitted throughout: Next
+  // fills them from each page's own title/description, so the project pages get
+  // their own card text without repeating it.
+  openGraph: openGraph("/"),
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export const viewport: Viewport = {
@@ -26,21 +39,15 @@ export const viewport: Viewport = {
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <ViewTransitions>
-      <html
-        suppressHydrationWarning
-        lang="en"
-        className="bg-white dark:bg-gray-800"
-      >
+      <html lang="en" className="bg-white dark:bg-gray-800">
         <body className="overflow-x-hidden lg:overflow-y-hidden">
-          <ThemeProvider attribute="class">
-            <div id="root" className="flex flex-col items-center">
-              <Suspense fallback={<Loading />}>{children}</Suspense>
-              <Script
-                src="https://analytics.remy.lol/script.js"
-                data-website-id="371ca0ca-bed0-4b09-a25d-f14cbaed47c5"
-              />
-            </div>
-          </ThemeProvider>
+          <div id="root" className="flex flex-col items-center">
+            <Suspense fallback={<Loading />}>{children}</Suspense>
+            <Script
+              src="https://analytics.remy.lol/script.js"
+              data-website-id="371ca0ca-bed0-4b09-a25d-f14cbaed47c5"
+            />
+          </div>
         </body>
       </html>
     </ViewTransitions>

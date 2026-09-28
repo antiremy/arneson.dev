@@ -9,20 +9,26 @@ export function PortfolioWrapper(): JSX.Element {
   const [seeMore, setSeeMore] = useState(false);
   return (
     <>
-      <div className="scrollbar z-30 max-w-4xl max-h-full overflow-x-hidden lg:overflow-y-scroll px-2">
-        <Portfolio seeMore={seeMore} setSeeMore={setSeeMore} />
-      </div>
-      <div className="w-full pt-2 text-center">
-        <a
-          className="invisible w-full text-center lg:visible lg:mb-6"
+      <main className="scrollbar z-30 max-h-full max-w-4xl overflow-x-hidden px-2 lg:overflow-y-scroll">
+        <Portfolio seeMore={seeMore} />
+      </main>
+      <div className="w-full text-center lg:pt-2">
+        <button
+          type="button"
+          // Only the desktop layout collapses the list, so the toggle stays out
+          // of the tab order and accessibility tree on mobile.
+          className="hidden w-full cursor-pointer text-center lg:mb-6 lg:block"
+          aria-expanded={seeMore}
+          aria-controls="portfolio-list"
           onClick={() => setSeeMore(!seeMore)}
+          data-umami-event={seeMore ? "See less" : "See more"}
         >
           <FontAwesomeIcon
             className="text-lg"
             icon={seeMore ? faArrowUp : faArrowDown}
           />
           {seeMore ? " See Less" : " See More"}
-        </a>
+        </button>
       </div>
     </>
   );
