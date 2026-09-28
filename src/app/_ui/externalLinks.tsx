@@ -1,7 +1,4 @@
-import {
-  faGithub,
-  faLinkedinIn,
-} from "@fortawesome/free-brands-svg-icons";
+import { faGithub, faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
 
 import IconLink from "./iconLink.tsx";
 

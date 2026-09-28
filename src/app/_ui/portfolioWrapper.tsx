@@ -2,34 +2,57 @@
 
 import { JSX, useState } from "react";
 import Portfolio from "./portfolio";
+import Timeline from "./timeline";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTableCellsLarge,
+  faTimeline,
+} from "@fortawesome/free-solid-svg-icons";
+
+type View = "cards" | "timeline";
+
+const views = [
+  { value: "cards", label: "Cards", icon: faTableCellsLarge },
+  { value: "timeline", label: "Timeline", icon: faTimeline },
+] as const;
 
 export function PortfolioWrapper(): JSX.Element {
-  const [seeMore, setSeeMore] = useState(false);
+  const [view, setView] = useState<View>("cards");
   return (
     <>
-      <main className="scrollbar z-30 max-h-full max-w-4xl overflow-x-hidden px-2 lg:overflow-y-scroll">
-        <Portfolio seeMore={seeMore} />
-      </main>
-      <div className="w-full text-center lg:pt-2">
-        <button
-          type="button"
-          // Only the desktop layout collapses the list, so the toggle stays out
-          // of the tab order and accessibility tree on mobile.
-          className="hidden w-full cursor-pointer text-center lg:mb-6 lg:block"
-          aria-expanded={seeMore}
-          aria-controls="portfolio-list"
-          onClick={() => setSeeMore(!seeMore)}
-          data-umami-event={seeMore ? "See less" : "See more"}
-        >
-          <FontAwesomeIcon
-            className="text-lg"
-            icon={seeMore ? faArrowUp : faArrowDown}
-          />
-          {seeMore ? " See Less" : " See More"}
-        </button>
+      <div
+        role="group"
+        aria-label="Experience view"
+        className="z-30 mt-4 flex gap-1 rounded-lg bg-slate-800/5 p-1 dark:bg-white/10"
+      >
+        {views.map(({ value, label, icon }) => (
+          <button
+            key={value}
+            type="button"
+            aria-pressed={view === value}
+            onClick={() => setView(value)}
+            data-umami-event={`${label} view`}
+            className={`cursor-pointer rounded-md px-3 py-1 transition duration-300 ${
+              view === value
+                ? "bg-slate-800/15 dark:bg-white/25"
+                : "hover:bg-slate-800/10 dark:hover:bg-white/15"
+            }`}
+          >
+            <FontAwesomeIcon className="pr-2" icon={icon} />
+            {label}
+          </button>
+        ))}
       </div>
+      {/* The gap lives on the scroll container, not the list, so scrolled
+          content clips below the toggle instead of right against it. */}
+      <main className="scrollbar z-30 mt-6 max-h-full max-w-4xl overflow-x-hidden px-2 lg:overflow-y-scroll">
+        {/* Keying on the view remounts the wrapper so the fade replays on each
+            switch. A plain CSS animation (rather than a view transition) stays
+            clipped by the scroll container. */}
+        <div key={view} className="motion-safe:animate-fade-in">
+          {view === "cards" ? <Portfolio /> : <Timeline />}
+        </div>
+      </main>
     </>
   );
 }
