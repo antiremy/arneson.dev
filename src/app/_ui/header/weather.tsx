@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
 import { useState } from "react";
-import { WeatherIcon } from 'weather-react-icons';
+import { WeatherIcon } from "weather-react-icons";
 
-import 'weather-react-icons/lib/css/weather-icons.css';
+import "weather-react-icons/lib/css/weather-icons.css";
 
 interface WeatherProps {
   temp: number | undefined;
@@ -18,19 +18,24 @@ export default function Weather(props: WeatherProps) {
     <span className="flex flex-row items-center text-sm">
       <div>
         {props.condition_id && (
-          <WeatherIcon name="owm" iconId={props.condition_id} className="mr-1 text-lg"/>
+          <WeatherIcon
+            name="owm"
+            iconId={props.condition_id}
+            className="mr-1 text-lg"
+          />
         )}
       </div>
-
       <span
         onMouseOver={() => setTempMouseOver(true)}
         onMouseOut={() => setTempMouseOver(false)}
       >
         {tempMouseOver
           ? `${
-              props.temp ? Math.round(((props.temp - 32) * 5) / 9) : "--"
+              props.temp !== undefined
+                ? Math.round(((props.temp - 32) * 5) / 9)
+                : "--"
             }°C`
-          : `${props.temp ? Math.round(props.temp) : "--"}°F`}
+          : `${props.temp !== undefined ? Math.round(props.temp) : "--"}°F`}
       </span>
       &nbsp;
       {props.condition_desc ? `and ${props.condition_desc}` : ""}

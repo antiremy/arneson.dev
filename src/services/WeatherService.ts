@@ -30,7 +30,16 @@ async function getWeather(
       return null;
     }
 
-    return await res.json();
+    const resp = await res.json();
+
+    if (!resp?.main || !resp.weather?.[0]) {
+      console.error(
+        `Unexpected weather API response shape: ${JSON.stringify(resp)}`,
+      );
+      return null;
+    }
+
+    return resp;
   } catch (e) {
     console.error(e);
     return null;
@@ -114,7 +123,13 @@ async function getSimplifiedWeatherData(
 
   if (visitorWeather) {
     response.local = {
-      location: visitorName,
+      location:
+        visitorName ||
+        getLocationString(
+          visitorWeather.name,
+          null,
+          visitorWeather.sys.country,
+        ),
       temp: visitorWeather.main.temp,
       condition_desc: visitorWeather.weather[0].description,
       condition_id: visitorWeather.weather[0].id,
