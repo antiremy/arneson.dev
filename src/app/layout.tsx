@@ -43,10 +43,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <body className="overflow-x-hidden lg:overflow-y-hidden">
           <div id="root" className="flex flex-col items-center">
             <Suspense fallback={<Loading />}>{children}</Suspense>
-            <Script
-              src="https://analytics.remy.lol/script.js"
-              data-website-id="371ca0ca-bed0-4b09-a25d-f14cbaed47c5"
-            />
+            {process.env.NODE_ENV === "production" && (
+              <>
+                <Script
+                  src="https://analytics.remy.lol/script.js"
+                  data-website-id="371ca0ca-bed0-4b09-a25d-f14cbaed47c5"
+                />
+                <Script
+                  src="https://analytics.remy.lol/recorder.js"
+                  data-website-id="371ca0ca-bed0-4b09-a25d-f14cbaed47c5"
+                />
+              </>
+            )}
           </div>
         </body>
       </html>
