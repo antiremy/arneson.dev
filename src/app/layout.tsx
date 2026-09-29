@@ -47,10 +47,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <>
                 <Script
                   src="https://analytics.remy.lol/script.js"
+                  strategy="lazyOnload"
                   data-website-id="371ca0ca-bed0-4b09-a25d-f14cbaed47c5"
                 />
                 <Script
                   src="https://analytics.remy.lol/recorder.js"
+                  strategy="lazyOnload"
                   data-website-id="371ca0ca-bed0-4b09-a25d-f14cbaed47c5"
                 />
               </>
