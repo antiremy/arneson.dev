@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@theme {
+  --drop-shadow-glow:
+    0 0 5px rgb(255 255 255 / 0.35), 0 0 15px rgb(255 255 255 / 0.2);
+
+  --animate-fade-in: fade-in 300ms ease-out;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+  }
+}
+
+@layer utilities {
+  .scrollbar {
+    scrollbar-color: rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0);
+    scrollbar-width: thin;
+    scrollbar-gutter: stable both-edges;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .scrollbar {
+      scrollbar-color: rgba(255, 255, 255, 0.7) rgba(0, 0, 0, 0);
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  html,
+  body,
+  #root {
+    height: 100%;
+    margin: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,11 @@
+# Keep local secrets, installs, and build output out of the build context; the
+# builder stage installs and builds from a clean slate.
+.env*
+.git
+node_modules
+dist
+.next
+.playwright-mcp
+.opencode
+.vscode
+.claude
