@@ -1,18 +1,25 @@
-import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
-import nextTypescript from "eslint-config-next/typescript";
+import reactHooks from "eslint-plugin-react-hooks";
+import reactRefresh from "eslint-plugin-react-refresh";
+import globals from "globals";
+import tseslint from "typescript-eslint";
 
-const eslintConfig = [
-  ...nextCoreWebVitals,
-  ...nextTypescript,
+export default tseslint.config(
+  { ignores: ["dist/**", "node_modules/**"] },
+  ...tseslint.configs.recommended,
+  reactHooks.configs.flat.recommended,
   {
-    ignores: [
-      "node_modules/**",
-      ".next/**",
-      "out/**",
-      "build/**",
-      "next-env.d.ts",
-    ],
+    files: ["src/**/*.{ts,tsx}"],
+    languageOptions: { globals: globals.browser },
+    plugins: { "react-refresh": reactRefresh },
+    rules: {
+      "react-refresh/only-export-components": [
+        "warn",
+        { allowConstantExport: true },
+      ],
+    },
   },
-];
-
-export default eslintConfig;
+  {
+    files: ["server/**/*.ts", "scripts/**/*.mjs", "vite.config.ts"],
+    languageOptions: { globals: globals.node },
+  },
+);

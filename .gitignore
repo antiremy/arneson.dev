@@ -23,7 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 
 .next
-next-env.d.ts
 dist
 *.tsbuildinfo
+.playwright-mcp
 .opencode

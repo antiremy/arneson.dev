@@ -1,9 +1,13 @@
-<!-- BEGIN:nextjs-agent-rules -->
+# arneson.dev
 
-# This is NOT the Next.js you know
+React 19 + Vite 8 + Tailwind 4, with React Router 8 in data mode. There is no
+Next.js and no runtime SSR:
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
-
-This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
-
-<!-- END:nextjs-agent-rules -->
+- `src/entry-server.tsx` + `scripts/prerender.mjs` prerender every route to
+  static HTML at build time; `src/main.tsx` hydrates it.
+- Per-page `<head>` tags come from each route's `handle` (`PageMeta`), rendered
+  by `src/head.tsx`.
+- `server/index.ts` is the only runtime code: a `node:http` server with no
+  dependencies that serves `dist/client` and `/api/weather`. Keep it free of
+  npm dependencies so the runtime image needs no `node_modules`.
+- Node.js version lives in `.node-version` (CI and Docker both read it).

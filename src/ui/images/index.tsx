@@ -1,0 +1,23 @@
+// Converted to WebP at build time by vite-imagetools, standing in for the
+// format negotiation Next's image optimizer did per request.
+import MonitrPingsTable from "./originals/MonitrPingsTable.png?format=webp&as=metadata";
+import MonitrSearchMobile from "./originals/MonitrStoreSearch.png?format=webp&as=metadata";
+import MonitrNotificationsMobile from "./originals/MonitrNotifications.png?format=webp&as=metadata";
+import WrathTasks from "./originals/WrathTasks.png?format=webp&as=metadata";
+import WrathDashboard from "./originals/WrathDashboard.png?format=webp&as=metadata";
+
+import Image from "./image";
+
+const images = {
+  MonitrPingsTable: <Image src={MonitrPingsTable} alt="Monitr Desktop Pings" />,
+  MonitrSearchMobile: (
+    <Image src={MonitrSearchMobile} alt="Monitr Mobile Search" />
+  ),
+  MonitrNotificationsMobile: (
+    <Image src={MonitrNotificationsMobile} alt="Monitr Notifications" />
+  ),
+  WrathTasks: <Image src={WrathTasks} alt="Wrath Tasks" />,
+  WrathDashboard: <Image src={WrathDashboard} alt="Wrath Dashboard" />,
+};
+
+export default images;
