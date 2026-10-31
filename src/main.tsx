@@ -1,3 +1,4 @@
+import { config } from "@fortawesome/fontawesome-svg-core";
 import { StrictMode } from "react";
 import { createRoot, hydrateRoot } from "react-dom/client";
 import { createBrowserRouter } from "react-router";
@@ -7,9 +8,11 @@ import { routes } from "./routes";
 import "./global.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 
-const router = createBrowserRouter(routes, {
-  hydrationData: window.__staticRouterHydrationData,
-});
+// The stylesheet is bundled above; stop Font Awesome from also injecting a
+// <style> tag at runtime, which the Content-Security-Policy would block.
+config.autoAddCss = false;
+
+const router = createBrowserRouter(routes);
 
 const app = (
   <StrictMode>
