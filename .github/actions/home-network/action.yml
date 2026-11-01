@@ -1,0 +1,30 @@
+name: Connect to home network
+description: Brings up a WireGuard tunnel so the job can reach *.local.remy.lol.
+
+inputs:
+  config:
+    description: A wg-quick config. Its DNS line, if any, is used only for local.remy.lol.
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Bring up WireGuard
+      shell: bash
+      env:
+        WG_CONFIG: ${{ inputs.config }}
+      run: |
+        sudo apt-get update -qq
+        sudo apt-get install -y -qq wireguard-tools
+
+        # wg-quick needs resolvconf for DNS lines, which the runner lacks, so
+        # DNS is pulled out and set as split DNS with resolvectl instead.
+        dns=$(printf '%s\n' "$WG_CONFIG" | sed -n 's/^[[:space:]]*DNS[[:space:]]*=[[:space:]]*//p' | cut -d, -f1)
+        printf '%s\n' "$WG_CONFIG" | grep -v '^[[:space:]]*DNS[[:space:]]*=' | sudo tee /etc/wireguard/wg0.conf > /dev/null
+        sudo chmod 600 /etc/wireguard/wg0.conf
+        sudo wg-quick up wg0
+
+        if [ -n "$dns" ]; then
+          sudo resolvectl dns wg0 "$dns"
+          sudo resolvectl domain wg0 "~local.remy.lol"
+        fi

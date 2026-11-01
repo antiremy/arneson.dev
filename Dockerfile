@@ -15,9 +15,6 @@ ARG NODE_VARIANT=slim
 
 FROM node:${NODE_VERSION}-${NODE_VARIANT} AS dependencies
 
-ENV NPM_CONFIG_REGISTRY=https://nexus.local.remy.lol/repository/npm-group/
-ENV COREPACK_NPM_REGISTRY=https://nexus.local.remy.lol/repository/npm-group/
-
 WORKDIR /app
 
 # Copy package-related files first to leverage Docker's caching mechanism

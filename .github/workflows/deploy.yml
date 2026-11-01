@@ -10,13 +10,17 @@ on:
       - ".github/dependabot.yml"
   workflow_dispatch:
 
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
 env:
   REGISTRY: docker.local.remy.lol
   IMAGE_NAME: arneson.dev
 
 jobs:
   lint-and-typecheck:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     permissions:
       contents: read
 
@@ -41,7 +45,7 @@ jobs:
         run: pnpm typecheck
 
   build-and-push:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: lint-and-typecheck
     permissions:
       contents: read
@@ -49,6 +53,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Connect to home network
+        uses: ./.github/actions/home-network
+        with:
+          config: ${{ secrets.WIREGUARD_CONFIG }}
 
       - name: Extract image metadata
         id: meta
@@ -65,6 +74,9 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4
+        with:
+          # BuildKit must share the host network to use the tunnel and its DNS.
+          driver-opts: network=host
 
       - name: Build and push image
         id: build
@@ -81,12 +93,21 @@ jobs:
           cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max,image-manifest=true,oci-mediatypes=true
 
   deploy:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: build-and-push
     environment: prod
-    permissions: {}
+    permissions:
+      contents: read
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Connect to home network
+        uses: ./.github/actions/home-network
+        with:
+          config: ${{ secrets.WIREGUARD_CONFIG }}
+
       - name: Trigger Portainer container redeploy
         env:
           PORTAINER_WEBHOOK_URL: ${{ secrets.PORTAINER_WEBHOOK_URL }}
@@ -106,7 +127,7 @@ jobs:
 
   notify:
     name: Notify Discord
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: [lint-and-typecheck, build-and-push, deploy]
     if: always()
     permissions: {}
