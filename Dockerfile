@@ -15,8 +15,8 @@ ARG NODE_VARIANT=slim
 
 FROM node:${NODE_VERSION}-${NODE_VARIANT} AS dependencies
 
-ENV NPM_CONFIG_REGISTRY=https://nexus.local.remy.lol/repository/npm-group/
-ENV COREPACK_NPM_REGISTRY=https://nexus.local.remy.lol/repository/npm-group/
+ENV NPM_CONFIG_REGISTRY=https://nora.local.remy.lol/npm/
+ENV COREPACK_NPM_REGISTRY=https://nora.local.remy.lol/npm/
 
 WORKDIR /app
 

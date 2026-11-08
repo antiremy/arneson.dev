@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 env:
-  REGISTRY: docker.local.remy.lol
+  REGISTRY: nora.local.remy.lol
   IMAGE_NAME: arneson.dev
 
 jobs:
