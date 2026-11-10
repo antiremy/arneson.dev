@@ -1,3 +1,6 @@
 allowBuilds:
   sharp: true
 blockExoticSubdeps: false
+# minutes = 7 days; mirrors nora's min-release-age so the gate also applies
+# to installs done outside nora. Escape hatch: minimumReleaseAgeExclude.
+minimumReleaseAge: 10080

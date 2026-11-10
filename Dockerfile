@@ -16,7 +16,14 @@ ARG NODE_VARIANT=slim
 FROM node:${NODE_VERSION}-${NODE_VARIANT} AS dependencies
 
 ENV NPM_CONFIG_REGISTRY=https://nora.local.remy.lol/npm/
-ENV COREPACK_NPM_REGISTRY=https://nora.local.remy.lol/npm/
+# Corepack and the native pnpm binary it downloads on first use stay on npmjs
+# (COREPACK_NPM_REGISTRY also overrides NPM_CONFIG_REGISTRY for that download)
+# until nora fixes abbreviated per-version packuments: GET /npm/pnpm/<version>
+# with the corgi Accept header corepack sends replies {"name":"pnpm",
+# "versions":{}} and corepack crashes resolving pnpm. nora's 1-day quarantine
+# would also hold any pnpm release made within a day of a pin bump. Project
+# dependencies install from nora above, which serves them fine.
+ENV COREPACK_NPM_REGISTRY=https://registry.npmjs.org/
 
 WORKDIR /app
 
