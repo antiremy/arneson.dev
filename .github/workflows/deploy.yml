@@ -30,6 +30,8 @@ jobs:
           node-version-file: .node-version
 
       - name: Install dependencies
+        env:
+          NPM_CONFIG_REGISTRY: https://nora.local.remy.lol/npm/
         run: |
           corepack enable pnpm
           pnpm install --frozen-lockfile
