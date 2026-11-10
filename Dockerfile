@@ -16,7 +16,13 @@ ARG NODE_VARIANT=slim
 FROM node:${NODE_VERSION}-${NODE_VARIANT} AS dependencies
 
 ENV NPM_CONFIG_REGISTRY=https://nora.local.remy.lol/npm/
-ENV COREPACK_NPM_REGISTRY=https://nora.local.remy.lol/npm/
+# Corepack and the native pnpm binary it downloads on first use stay on npmjs
+# on purpose (COREPACK_NPM_REGISTRY also overrides NPM_CONFIG_REGISTRY for
+# that download): nora's curation rejects any npm version under 7 days old,
+# and pnpm releases several times a week. It also breaks per-version packument
+# requests, which crashes corepack while resolving pnpm. Project dependencies
+# still install from nora above, which serves them fine.
+ENV COREPACK_NPM_REGISTRY=https://registry.npmjs.org/
 
 WORKDIR /app
 
