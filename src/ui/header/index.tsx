@@ -33,12 +33,12 @@ export default function Header({ weather }: HeaderProps) {
         {/* Kept in the layout but hidden until /api/weather responds, so
             nothing shifts when the weather arrives after the first paint. */}
         <div
-          className={`text-md flex w-full justify-center space-x-3 pt-4 text-sm ${
+          className={`text-md flex w-full flex-wrap justify-center gap-x-3 pt-4 text-center text-sm ${
             weather ? "motion-safe:animate-fade-in" : "invisible"
           }`}
         >
-          <div>
-            <FontAwesomeIcon className="lg:text-lg" icon={faLocationDot} />
+          <div className="max-w-full">
+            <FontAwesomeIcon className="text-lg" icon={faLocationDot} />
             &nbsp;{current?.location}
           </div>
 

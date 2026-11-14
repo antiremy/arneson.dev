@@ -19,7 +19,7 @@ export default function Weather(props: WeatherProps) {
           <WeatherIcon
             name="owm"
             iconId={props.condition_id}
-            className="mr-1 text-lg"
+            className="mr-1 text-xl"
           />
         )}
       </div>
