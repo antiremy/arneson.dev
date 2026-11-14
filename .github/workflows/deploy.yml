@@ -97,13 +97,11 @@ jobs:
         env:
           PORTAINER_WEBHOOK_URL: ${{ secrets.PORTAINER_WEBHOOK_URL }}
         run: |
-          response_file=$(mktemp)
-          HTTP_STATUS=$(curl -s -o "$response_file" -w "%{http_code}" \
+          # The response body is discarded: logs on this public repo are
+          # world-readable.
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
             -X POST \
             "$PORTAINER_WEBHOOK_URL")
-
-          cat "$response_file"
-          rm -f "$response_file"
 
           if [ "$HTTP_STATUS" -lt 200 ] || [ "$HTTP_STATUS" -ge 300 ]; then
             echo "Portainer stack redeploy failed with HTTP $HTTP_STATUS"

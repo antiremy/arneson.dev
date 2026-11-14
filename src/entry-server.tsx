@@ -36,7 +36,14 @@ export async function render(path: string) {
   return {
     head: renderToStaticMarkup(<Head meta={meta} />),
     html: renderToString(
-      <StaticRouterProvider router={router} context={context} />,
+      // hydrate={false} omits the inline __staticRouterHydrationData script,
+      // which would otherwise need a CSP hash. No route has a loader, so there
+      // is no data to hand over; add hydration back if that changes.
+      <StaticRouterProvider
+        router={router}
+        context={context}
+        hydrate={false}
+      />,
     ),
   };
 }

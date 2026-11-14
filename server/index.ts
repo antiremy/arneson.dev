@@ -32,6 +32,29 @@ const CONTENT_TYPES: Record<string, string> = {
   ".eot": "application/vnd.ms-fontobject",
 };
 
+// Applied to every response. The analytics origin serves Umami's tracker and
+// session recorder; the recorder posts from a blob: worker. style-src-attr
+// allows the style="" attributes React prerenders (see ui/header/clock.tsx).
+const SECURITY_HEADERS: Record<string, string> = {
+  "Content-Security-Policy": [
+    "default-src 'self'",
+    "script-src 'self' https://analytics.remy.lol",
+    "connect-src 'self' https://analytics.remy.lol",
+    "worker-src blob:",
+    "style-src 'self'",
+    "style-src-attr 'unsafe-inline'",
+    "img-src 'self' data:",
+    "object-src 'none'",
+    "base-uri 'none'",
+    "form-action 'none'",
+    "frame-ancestors 'none'",
+  ].join("; "),
+  "Cross-Origin-Opener-Policy": "same-origin",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "DENY",
+};
+
 interface StaticFile {
   path: string;
   size: number;
@@ -126,7 +149,9 @@ async function handleWeather(req: IncomingMessage, res: ServerResponse) {
 }
 
 async function handle(req: IncomingMessage, res: ServerResponse) {
-  res.setHeader("X-Content-Type-Options", "nosniff");
+  for (const [name, value] of Object.entries(SECURITY_HEADERS)) {
+    res.setHeader(name, value);
+  }
 
   if (req.method !== "GET" && req.method !== "HEAD") {
     res.writeHead(405, { Allow: "GET, HEAD" }).end();

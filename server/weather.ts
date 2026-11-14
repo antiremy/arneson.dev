@@ -9,6 +9,7 @@ const HOME_COORDS = { lat: 26.1224, lon: -80.1373 };
 // without bound; Map iteration order makes the first key the oldest entry.
 const CACHE_TTL_MS = 15 * 60 * 1000;
 const CACHE_MAX_ENTRIES = 1000;
+const UPSTREAM_TIMEOUT_MS = 5000;
 
 // Promises are cached rather than results so concurrent requests for the same
 // coordinates share a single upstream call.
@@ -61,6 +62,9 @@ async function fetchWeather(
   try {
     const res = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?units=imperial&appid=${process.env.OPEN_WEATHER_API_KEY}&lang=en&lat=${lat}&lon=${lon}`,
+      // The pending promise is cached, so a hung upstream call would stall
+      // every request for these coordinates until it settled.
+      { signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS) },
     );
 
     if (!res.ok) {
