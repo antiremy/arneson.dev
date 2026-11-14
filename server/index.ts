@@ -33,13 +33,14 @@ const CONTENT_TYPES: Record<string, string> = {
 };
 
 // Applied to every response. The analytics origin serves Umami's tracker and
-// session recorder; the recorder posts from a blob: worker. style-src-attr
+// session recorder; the recorder posts from a blob: worker. The cloudflareinsights
+// origins are for the beacon Cloudflare injects at the edge. style-src-attr
 // allows the style="" attributes React prerenders (see ui/header/clock.tsx).
 const SECURITY_HEADERS: Record<string, string> = {
   "Content-Security-Policy": [
     "default-src 'self'",
-    "script-src 'self' https://analytics.remy.lol",
-    "connect-src 'self' https://analytics.remy.lol",
+    "script-src 'self' https://analytics.remy.lol https://static.cloudflareinsights.com",
+    "connect-src 'self' https://analytics.remy.lol https://cloudflareinsights.com",
     "worker-src blob:",
     "style-src 'self'",
     "style-src-attr 'unsafe-inline'",
