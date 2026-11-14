@@ -21,7 +21,7 @@ export default function Section({
   return (
     <Link to={link}>
       <div
-        className="flex h-52 w-full max-w-96 flex-col rounded-lg bg-slate-800/5 p-5 transition duration-300 hover:cursor-pointer hover:bg-slate-800/15 dark:bg-white/10 dark:hover:bg-white/25"
+        className="flex min-h-52 w-full max-w-96 flex-col rounded-lg bg-slate-800/5 p-5 transition duration-300 hover:cursor-pointer hover:bg-slate-800/15 lg:h-52 dark:bg-white/10 dark:hover:bg-white/25"
         data-umami-event={`${title} card`}
       >
         <h2 className="text-xl font-semibold">{title}</h2>

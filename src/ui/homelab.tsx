@@ -159,7 +159,7 @@ export default function Homelab() {
         {items.map(({ title, details, icon }) => (
           <div
             key={title}
-            className="flex h-52 w-full max-w-96 flex-col rounded-lg bg-slate-800/5 p-5 dark:bg-white/10"
+            className="flex min-h-52 w-full max-w-96 flex-col rounded-lg bg-slate-800/5 p-5 lg:h-52 dark:bg-white/10"
           >
             <h2 className="text-xl font-semibold">
               <FontAwesomeIcon className="pr-2 text-emerald-600" icon={icon} />

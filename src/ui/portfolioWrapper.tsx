@@ -74,7 +74,7 @@ export function PortfolioWrapper(): JSX.Element {
       <div
         role="group"
         aria-label="Section"
-        className="z-30 mt-4 flex gap-1 rounded-lg bg-slate-800/5 p-1 dark:bg-white/10"
+        className="z-30 mx-2 mt-4 flex gap-1 rounded-lg bg-slate-800/5 p-1 dark:bg-white/10"
       >
         {sections.map(({ value, label, icon }) => (
           <button
@@ -83,7 +83,7 @@ export function PortfolioWrapper(): JSX.Element {
             aria-pressed={section === value}
             onClick={() => setSection(value)}
             data-umami-event={`${label} section`}
-            className={`cursor-pointer rounded-md px-3 py-1 transition duration-300 ${
+            className={`cursor-pointer rounded-md px-2.5 py-1 whitespace-nowrap transition duration-300 sm:px-3 ${
               section === value
                 ? "bg-slate-800/15 dark:bg-white/25"
                 : "hover:bg-slate-800/10 dark:hover:bg-white/15"
@@ -98,7 +98,7 @@ export function PortfolioWrapper(): JSX.Element {
           target="_blank"
           rel="noreferrer"
           data-umami-event="Blog link"
-          className="rounded-md px-3 py-1 transition duration-300 hover:bg-slate-800/10 dark:hover:bg-white/15"
+          className="rounded-md px-2.5 py-1 whitespace-nowrap transition duration-300 hover:bg-slate-800/10 sm:px-3 dark:hover:bg-white/15"
         >
           <FontAwesomeIcon className="pr-2" icon={faBlog} />
           Blog
@@ -117,10 +117,7 @@ export function PortfolioWrapper(): JSX.Element {
         {/* Keying on the section and view remounts the wrapper so the fade
             replays on each switch. A plain CSS animation (rather than a view
             transition) stays clipped by the scroll container. */}
-        <div
-          key={`${section}-${view}`}
-          className="motion-safe:animate-fade-in"
-        >
+        <div key={`${section}-${view}`} className="motion-safe:animate-fade-in">
           {section === "homelab" ? (
             <Homelab />
           ) : (
