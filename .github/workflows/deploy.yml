@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 env:
-  REGISTRY: docker.local.remy.lol
+  REGISTRY: nora.local.remy.lol
   IMAGE_NAME: arneson.dev
 
 jobs:
@@ -30,6 +30,8 @@ jobs:
           node-version-file: .node-version
 
       - name: Install dependencies
+        env:
+          NPM_CONFIG_REGISTRY: https://nora.local.remy.lol/npm/
         run: |
           corepack enable pnpm
           pnpm install --frozen-lockfile
@@ -87,7 +89,11 @@ jobs:
     permissions: {}
 
     steps:
-      - name: Trigger Portainer container redeploy
+      # PORTAINER_WEBHOOK_URL must be the current stack's webhook
+      # (Portainer -> Stacks -> <stack> -> Webhook), formatted like
+      # https://portainer.local.remy.lol/api/stacks/<id>/webhook?env=<envId>.
+      # A POST there makes Portainer re-pull the image and redeploy the stack.
+      - name: Redeploy Portainer stack
         env:
           PORTAINER_WEBHOOK_URL: ${{ secrets.PORTAINER_WEBHOOK_URL }}
         run: |
@@ -98,11 +104,12 @@ jobs:
             "$PORTAINER_WEBHOOK_URL")
 
           if [ "$HTTP_STATUS" -lt 200 ] || [ "$HTTP_STATUS" -ge 300 ]; then
-            echo "Portainer redeploy failed with HTTP $HTTP_STATUS"
+            echo "Portainer stack redeploy failed with HTTP $HTTP_STATUS"
+            echo "Check that PORTAINER_WEBHOOK_URL points to the current stack's webhook."
             exit 1
           fi
 
-          echo "Deployed successfully (HTTP $HTTP_STATUS)"
+          echo "Stack redeploy triggered (HTTP $HTTP_STATUS)"
 
   notify:
     name: Notify Discord

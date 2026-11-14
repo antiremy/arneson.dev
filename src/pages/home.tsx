@@ -26,7 +26,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="mt-6 lg:mt-auto">
+      <div className="mt-auto pt-8">
         <Header weather={weather} />
       </div>
       <PortfolioWrapper />
